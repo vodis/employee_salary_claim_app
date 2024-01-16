@@ -38,13 +38,14 @@ jobs:
           remote_path: ${{ secrets.REMOTE_PATH }}
           sftpArgs: '-o ConnectTimeout=5'
           sftp_only: true
+          port: ${{ secrets.REMOTE_PORT }}
 
       - name: 🛠 Execute npm commands on remote server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh 
