@@ -49,5 +49,5 @@ jobs:
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh 
-            cd ${{ secrets.FTP_PATH }}
+            cd ${{ secrets.REMOTE_PATH }}
             make build-prod
