@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint-fix": "eslint --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
@@ -38,6 +39,8 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "prettier": "^3.2.2"
   },
   "eslintConfig": {
@@ -57,5 +60,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "lint-staged": {
+    "*.{ts,html}": [
+      "npm run lint",
+      "npm run format"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
