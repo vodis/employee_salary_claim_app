@@ -46,6 +46,7 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           password: ${{ secrets.REMOTE_PASSWORD }}
+          port: ${{ secrets.REMOTE_PORT }}
           script: |
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh 
