@@ -180,6 +180,7 @@ const Header = () => {
                     href="https://airdrop-hunter.site/"
                     className="menu-block__link menu-block__link_ab"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <span>About</span>
                     <svg
