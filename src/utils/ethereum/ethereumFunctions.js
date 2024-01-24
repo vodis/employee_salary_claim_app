@@ -5,6 +5,7 @@ const abiJsonTime = require('./abi/contractReferrals.json');
 const abiJsonRef = require('./abi/contractReferralsInfo.json');
 const abiRefForCliam = require('./abi/ref_claim.json');
 const abiRefForNick = require('./abi/referralNick.json');
+const abiRefForChargeVesting = require('../../contracts/abi/ChargeVesting.json');
 
 export const getContract = (chainId, provider, isFetchTime) => {
   let address;
@@ -188,8 +189,8 @@ export const getRefContractForNickRead = async () => {
   return new ethers.Contract(address, abiRefForNick, provider);
 };
 
-export const getRefContractForNick = (chainId, signer) => {
-  const address = '0x3C57a2cE1442E0A6678B060A372A10B963675CC4';
+export const getRefContractForChargeVesting = (chainId, signer) => {
+  const address = '0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2';
 
-  return new ethers.Contract(address, abiRefForNick, signer);
+  return new ethers.Contract(address, abiRefForChargeVesting, signer);
 };

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { ReactComponent as WalletConnectLogo } from '../../../../ui/images/walletConnectLogo.svg';
+// import { ReactComponent as WalletConnectLogo } from '../../../../ui/images/walletConnectLogo.svg';
 import { ReactComponent as MetamMaskLogo } from '../../../../ui/images/metamaskLogo.svg';
-import { ReactComponent as OkxWallet } from '../../../../ui/images/okxLogo.svg';
+// import { ReactComponent as OkxWallet } from '../../../../ui/images/okxLogo.svg';
 import { useWeb3Modal } from '@web3modal/react';
 import { useDispatch } from 'react-redux';
 import { setAddress, setMethod } from '../../../../store/user/user-actions';
@@ -101,14 +101,14 @@ const Modal = ({ setIsModalOpen }) => {
             <MetamMaskLogo style={isMetamaskAvalible ? {} : { filter: 'grayscale(100%)' }} />
             <span>Metamask</span>
           </WalletOption>
-          <WalletOption onClick={async () => await handleWalletClick('OKX Wallet')}>
-            <OkxWallet style={isOkxAvalible ? {} : { filter: 'grayscale(100%)' }} />
-            <span>OKX Wallet</span>
-          </WalletOption>
-          <WalletOption onClick={async () => await handleWalletClick('WalletConnect')}>
-            <WalletConnectLogo />
-            <span>WalletConnect</span>
-          </WalletOption>
+          {/* <WalletOption onClick={async () => await handleWalletClick('OKX Wallet')}> */}
+          {/*  <OkxWallet style={isOkxAvalible ? {} : { filter: 'grayscale(100%)' }} /> */}
+          {/*  <span>OKX Wallet</span> */}
+          {/* </WalletOption> */}
+          {/* <WalletOption onClick={async () => await handleWalletClick('WalletConnect')}> */}
+          {/*  <WalletConnectLogo /> */}
+          {/*  <span>WalletConnect</span> */}
+          {/* </WalletOption> */}
         </WalletOptionsWrapper>
       </ModalWrapper>
     </ModalOverlay>

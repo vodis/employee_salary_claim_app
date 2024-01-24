@@ -20,39 +20,36 @@ const AdminCard = () => {
         </div>
 
         <div className="border border-success rounded p-3 mb-3">
-          <div className="d-flex align-items-center gap-2">
-            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Top up the contract (usdt)</p>
-            <button
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#deposit"
-              className="btn btn-success flex-grow-2 flex-shrink-1"
-            >
-              Deposit
-            </button>
-          </div>
-        </div>
-
-        <div className="border border-secondary rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
             <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Create task</p>
-            <button type="button" className="btn btn-secondary flex-grow-2 flex-shrink-1">
-              Deposit
+            <button type="button" className="btn btn-success flex-grow-2 flex-shrink-1">
+              Create task
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
             <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add assignee to task</p>
-            <button type="button" className="btn btn-secondary flex-grow-2 flex-shrink-1">
-              Deposit
+            <button type="button" className="btn btn-success flex-grow-2 flex-shrink-1">
+              Add assignee
             </button>
           </div>
         </div>
 
         <div className="border border-danger rounded p-3">
-          <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-2 mb-2">
             <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Fire an employee</p>
             <button type="button" className="btn btn-danger flex-grow-2 flex-shrink-1">
               Fired
+            </button>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Withdraw USDT from contract</p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#withdraw"
+              className="btn btn-danger flex-grow-2 flex-shrink-1"
+            >
+              Withdraw
             </button>
           </div>
         </div>
