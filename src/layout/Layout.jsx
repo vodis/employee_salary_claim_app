@@ -1,9 +1,9 @@
-import Header from '../views/Header';
+// import Header from '../views/Header';
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {children}
     </>
   );

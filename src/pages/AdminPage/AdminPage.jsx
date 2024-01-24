@@ -17,9 +17,7 @@ const AdminPage = () => {
             </div>
           </div>
         </div>
-        <div className="row d-flex justify-content-center">
-          claim-v02
-        </div>
+        <div className="row d-flex justify-content-center">claim-v02</div>
       </div>
     </section>
   );

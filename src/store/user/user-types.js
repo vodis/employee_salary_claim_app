@@ -1,0 +1,4 @@
+export const USER_ACTION_TYPES = {
+  SET_ADDRESS: 'user/SET_ADDRESS',
+  SET_METHOD: 'user/SET_METHOD'
+};
