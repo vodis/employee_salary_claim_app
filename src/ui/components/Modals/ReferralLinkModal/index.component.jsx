@@ -24,9 +24,7 @@ import { setAddress, setMethod } from '../../../../store/user/user-actions';
 import { setCurrentUser } from '../../../../store/providerAndSigner/user-actions';
 import { useNetwork, useSwitchNetwork } from 'wagmi';
 import { getEthersProvider, getEthersSigner } from '../../../../utils/wallets/connectWallet';
-import {
-  getRefContractForNickRead
-} from '../../../../utils/ethereum/ethereumFunctions';
+import { getRefContractForNickRead } from '../../../../utils/ethereum/ethereumFunctions';
 import RegisterModalTx from '../RegisterNickModal/index.component';
 import { selectTheme } from '../../../../store/theme/theme-selector';
 
@@ -143,7 +141,7 @@ const ReferralLinkModal = ({ setModalOpen }) => {
           nick={nick}
           isLoading={false}
           error={''}
-          setIsModalOpen={ setTxModal }
+          setIsModalOpen={setTxModal}
         />
       ) : (
         <></>
