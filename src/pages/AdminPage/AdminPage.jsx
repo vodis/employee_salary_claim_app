@@ -2,8 +2,11 @@ import AdminCard from './components/AdminCard/AdminCard';
 import EmployeeCard from './components/EmployeeCard/EmployeeCard';
 import InfoCard from './components/InfoCard/InfoCard';
 import AdminModal from './components/AdminModal/AdminModal';
+import {useState} from "react";
 
 const AdminPage = () => {
+  const [responseData, setResponseData] = useState(null);
+
   return (
     <section className="page">
       <div className="container">
@@ -23,7 +26,7 @@ const AdminPage = () => {
           </div>
         </div>
         <div className="d-flex justify-content-between m-4">
-          <InfoCard />
+          <InfoCard data={responseData} />
         </div>
         <div className="d-flex justify-content-between m-4 gap-4 flex-wrap">
           <AdminCard />
@@ -31,7 +34,7 @@ const AdminPage = () => {
         </div>
       </div>
 
-      <AdminModal />
+      <AdminModal callback={(transaction) => setResponseData(transaction)} />
     </section>
   );
 };

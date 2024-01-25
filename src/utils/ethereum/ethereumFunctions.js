@@ -190,7 +190,7 @@ export const getRefContractForNickRead = async () => {
 };
 
 export const getRefContractForChargeVesting = (chainId, signer) => {
-  const address = '0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2';
+  const address = '0xcb0A9835CDf63c84FE80Fcc59d91d7505871c98B';
 
   return new ethers.Contract(address, abiRefForChargeVesting, signer);
 };

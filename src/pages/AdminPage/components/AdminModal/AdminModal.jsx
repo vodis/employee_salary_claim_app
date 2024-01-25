@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 // import {BigNumber} from "ethers";
 
-const AdminModal = () => {
+const AdminModal = ({callback}) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
 
@@ -19,7 +19,7 @@ const AdminModal = () => {
     };
 
     const transaction = await signer.sendTransaction(tx);
-    console.log(transaction);
+    callback(transaction);
   };
 
   return (

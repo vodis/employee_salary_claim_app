@@ -39,7 +39,7 @@ export const useWallet = () => {
 
     return () => {
       if (provider) {
-        provider.disconnect();
+        provider?.disconnect();
       }
       setProvider(null);
     };
