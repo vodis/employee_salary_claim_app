@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import AdminCard from './components/AdminCard/AdminCard';
 import EmployeeCard from './components/EmployeeCard/EmployeeCard';
 import InfoCard from './components/InfoCard/InfoCard';
 import AdminModal from './components/AdminModal/AdminModal';
-import {useState} from "react";
 
 const AdminPage = () => {
   const [responseData, setResponseData] = useState(null);

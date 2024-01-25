@@ -22,8 +22,13 @@ const AdminCard = () => {
         <div className="border border-success rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
             <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Create task</p>
-            <button type="button" className="btn btn-success flex-grow-2 flex-shrink-1">
-              Create task
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#add-task"
+              className="btn btn-success flex-grow-2 flex-shrink-1"
+            >
+              Add task
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
