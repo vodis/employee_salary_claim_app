@@ -67,11 +67,11 @@ export const AdminAddTaskModal = ({ callback }) => {
     ];
     const data = contract.interface.encodeFunctionData('addTask', values);
 
-    // const gasLimit = await contract.estimateGas.addTask(values);
+    const gasLimit = await contract.estimateGas.addTask(...values);
     const tx = {
       to: contract.address,
-      data
-      // gasLimit: gasLimit * 2
+      data,
+      gasLimit: gasLimit * 2
     };
 
     const transaction = await signer.sendTransaction(tx);

@@ -193,25 +193,45 @@ export const getRefContractForNickRead = async () => {
 };
 
 export const getRefContractForChargeVesting = (chainId, signer) => {
-  const address = '0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2';
-
-  return new ethers.Contract(address, abiRefForChargeVesting, signer);
+  switch (chainId) {
+    case 1337:
+      return new ethers.Contract('0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2', abiRefForChargeVesting, signer);
+    case 31337:
+      return new ethers.Contract('', abiRefForChargeVesting, signer);
+    default:
+      throw new Error('Opps!');
+  }
 };
 
 export const getRefContractForTaskManager = (chainId, signer) => {
-  const address = '0xf274De14171Ab928A5Ec19928cE35FaD91a42B64';
-
-  return new ethers.Contract(address, abiRefForTaskManager, signer);
+  switch (chainId) {
+    case 1337:
+      return new ethers.Contract('0xf274De14171Ab928A5Ec19928cE35FaD91a42B64', abiRefForTaskManager, signer);
+    case 31337:
+      return new ethers.Contract('', abiRefForTaskManager, signer);
+    default:
+      throw new Error('Opps!');
+  }
 };
 
 export const getRefContractForEmployeeManager = (chainId, signer) => {
-  const address = '0xcb0A9835CDf63c84FE80Fcc59d91d7505871c98B';
-
-  return new ethers.Contract(address, abiRefForEmployeeManager, signer);
+  switch (chainId) {
+    case 1337:
+      return new ethers.Contract('0x9852795dbb01913439f534b4984fBf74aC8AfA12', abiRefForEmployeeManager, signer);
+    case 31337:
+      return new ethers.Contract('', abiRefForEmployeeManager, signer);
+    default:
+      throw new Error('Opps!');
+  }
 };
 
 export const getRefContractForEmployeeRateModel = (chainId, signer) => {
-  const address = '0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2';
-
-  return new ethers.Contract(address, abiRefForEmployeeRateModel, signer);
+  switch (chainId) {
+    case 1337:
+      return new ethers.Contract('0x889D9A5AF83525a2275e41464FAECcCb3337fF60', abiRefForEmployeeRateModel, signer);
+    case 31337:
+      return new ethers.Contract('', abiRefForEmployeeRateModel, signer);
+    default:
+      throw new Error('Opps!');
+  }
 };

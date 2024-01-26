@@ -1,13 +1,44 @@
 import { useState } from 'react';
+import { getRefContractForEmployeeManager } from '../../../../utils/ethereum/ethereumFunctions';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
+import { useWallet } from '../../../../hooks/useWallet';
 
-export const AdminAddEmployee = () => {
+export const AdminAddEmployee = ({ callback }) => {
+  const { signer } = useSelector(selectCurrentUser);
+  const { chainId } = useWallet();
   const [formData, setFormData] = useState({
+    nickname: '',
     address: '',
-    isProbation: ''
+    isProbation: true
   });
 
-  const handleAddEmployee = (fieldKey, fieldValue) => {
+  const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
+  };
+
+  const handleAddEmployee = (e) => {
+    e.preventDefault();
+    // TODO Add field validations before send tx
+    handleSendTransaction();
+  };
+
+  const handleSendTransaction = async () => {
+    const contract = getRefContractForEmployeeManager(chainId, signer);
+    const values = [formData.nickname, formData.address, formData.isProbation];
+    const data = contract.interface.encodeFunctionData('addEmployee', values);
+
+    const gasLimit = await contract.estimateGas.addEmployee(...values);
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit * 2
+    };
+
+    const transaction = await signer.sendTransaction(tx);
+    const receipt = await transaction.wait();
+
+    callback(transaction, receipt);
   };
 
   return (
@@ -37,23 +68,29 @@ export const AdminAddEmployee = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Address"
-                  aria-label="Address"
+                  placeholder="Nickname"
+                  aria-label="Nickname"
                   aria-describedby="basic-addon1"
-                  value={formData.address}
-                  // onChange={(e) => handleChangeField('title', e.target.value)}
+                  value={formData.nickname}
+                  onChange={(e) => handleChangeField('nickname', e.target.value)}
                 />
               </div>
               <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="isProbation"
-                  aria-label="isProbation"
+                  placeholder="Address"
+                  aria-label="Address"
                   aria-describedby="basic-addon1"
-                  value={formData.isProbation}
-                  // onChange={(e) => handleChangeField('description', e.target.value)}
+                  value={formData.address}
+                  onChange={(e) => handleChangeField('address', e.target.value)}
                 />
+              </div>
+              <div className="input-group mb-3">
+                <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
+                  <input className="form-check-input m-0" type="checkbox" id="isProbation" checked={formData.isProbation} onChange={(e) => handleChangeField('isProbation', e.target.checked)} aria-label="isProbation" />
+                  <label className="form-check-label w-auto h-auto m-0" htmlFor="isProbation">Is probation period</label>
+                </div>
               </div>
             </div>
             <div className="p-2">
