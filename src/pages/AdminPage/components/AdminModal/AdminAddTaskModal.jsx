@@ -54,21 +54,24 @@ export const AdminAddTaskModal = ({ callback }) => {
     const values = [
       formData.title,
       formData.description,
-      formData.periods.map((per) => BigNumber.from(new Date(new Date().getTime() + per * 60 * 60).getTime()).div(
-          1000
-      )),
+      formData.periods.map((per) =>
+        BigNumber.from(new Date(new Date().getTime() + per * 60 * 60).getTime()).div(1000)
+      ),
       formData.prices.map((pr) => BigNumber.from(pr))
     ];
     const data = contract.interface.encodeFunctionData('addTask', values);
-    // const gasLimit = await contract.estimateGas.addTask(values);
+
+    const gasLimit = await contract.estimateGas.addTask(values);
     const tx = {
       to: contract.address,
       data,
-      // gasLimit: gasLimit * 2
+      gasLimit: gasLimit * 2
     };
 
     const transaction = await signer.sendTransaction(tx);
-    callback(transaction);
+    const receipt = await transaction.wait();
+
+    callback(transaction, receipt);
   };
 
   return (
@@ -170,9 +173,9 @@ export const AdminAddTaskModal = ({ callback }) => {
                 ))}
                 <div className="d-flex justify-content-between">
                   <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => !!taskPeriods && setTaskPeriods(taskPeriods - 1)}
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => !!taskPeriods && setTaskPeriods(taskPeriods - 1)}
                   >
                     - period
                   </button>

@@ -32,8 +32,13 @@ const AdminCard = () => {
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add assignee to task</p>
-            <button type="button" className="btn btn-success flex-grow-2 flex-shrink-1">
+            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add assignee with rate</p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#add-employee"
+              className="btn btn-success flex-grow-2 flex-shrink-1"
+            >
               Add assignee
             </button>
           </div>

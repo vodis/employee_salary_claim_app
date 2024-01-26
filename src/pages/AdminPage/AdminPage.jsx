@@ -5,7 +5,8 @@ import InfoCard from './components/InfoCard/InfoCard';
 import AdminModal from './components/AdminModal/AdminModal';
 
 const AdminPage = () => {
-  const [responseData, setResponseData] = useState(null);
+  const [transaction, setTransaction] = useState(null);
+  const [receipt, setReceipt] = useState(null);
 
   return (
     <section className="page">
@@ -26,7 +27,7 @@ const AdminPage = () => {
           </div>
         </div>
         <div className="d-flex justify-content-between m-4">
-          <InfoCard data={responseData} />
+          <InfoCard tx={transaction} receipt={receipt} />
         </div>
         <div className="d-flex justify-content-between m-4 gap-4 flex-wrap">
           <AdminCard />
@@ -34,7 +35,12 @@ const AdminPage = () => {
         </div>
       </div>
 
-      <AdminModal callback={(transaction) => setResponseData(transaction)} />
+      <AdminModal
+        callback={(transaction, receipt) => {
+          setTransaction(transaction);
+          setReceipt(receipt);
+        }}
+      />
     </section>
   );
 };

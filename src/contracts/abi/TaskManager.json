@@ -5,6 +5,19 @@
     "type": "constructor"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      }
+    ],
+    "name": "TaskAdded",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "addSubTasks",
     "outputs": [],
@@ -35,7 +48,13 @@
       }
     ],
     "name": "addTask",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
