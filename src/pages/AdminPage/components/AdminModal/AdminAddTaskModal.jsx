@@ -39,8 +39,9 @@ export const AdminAddTaskModal = ({ callback }) => {
     handleSendTransaction();
   };
 
-  const onlyNumbers = (value) => {
-    return /^\d*\.?\d*$/.test(value) ? value : '';
+  const findNextPeriods = (id) => {
+    const isNextStepExist = formData.periods.length > id + 2 ? findNextPeriods(id + 1) : '';
+    return formData.periods[id + 1] ? formData.periods[id + 1] : isNextStepExist;
   };
 
   const handleBlurDate = (fieldKey, fieldValue) => {
@@ -54,18 +55,21 @@ export const AdminAddTaskModal = ({ callback }) => {
     const values = [
       formData.title,
       formData.description,
-      formData.periods.map((per) =>
-        BigNumber.from(new Date(new Date().getTime() + per * 60 * 60).getTime()).div(1000)
-      ),
+      formData.periods.map((per) => {
+        const inputDate = new Date(per + 'T00:00:00Z');
+        inputDate.setUTCHours(12, 0, 0, 0);
+        const timestamp = inputDate.getTime();
+        return BigNumber.from(timestamp).div(1000);
+      }),
       formData.prices.map((pr) => BigNumber.from(pr))
     ];
     const data = contract.interface.encodeFunctionData('addTask', values);
 
-    const gasLimit = await contract.estimateGas.addTask(values);
+    // const gasLimit = await contract.estimateGas.addTask(values);
     const tx = {
       to: contract.address,
-      data,
-      gasLimit: gasLimit * 2
+      data
+      // gasLimit: gasLimit * 2
     };
 
     const transaction = await signer.sendTransaction(tx);
@@ -131,46 +135,48 @@ export const AdminAddTaskModal = ({ callback }) => {
               )}
 
               <div className="border border-info rounded p-3 mb-3">
-                {[...Array(taskPeriods).keys()].map((id) => (
-                  <div key={id}>
-                    <div class="input-group mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Task completion time in hours, like: 0.5 or any integer 40"
-                        aria-label="Due date"
-                        aria-describedby="basic-addon1"
-                        value={formData.periods[id]}
-                        onChange={(e) =>
-                          handleChangeField('periods', onlyNumbers(e.target.value), id)
-                        }
-                        onBlur={(e) => handleBlurDate('periods', e.target.value, id)}
-                      />
-                    </div>
-                    {errors.includes('periods') && (
-                      <div class="alert alert-danger px-1 py-0" role="alert">
-                        Please add hours.
+                {[...Array(taskPeriods).keys()].map((id) => {
+                  return (
+                    <div key={id}>
+                      <div class="input-group mb-3">
+                        <input
+                          type="date"
+                          min={id ? formData.periods[id - 1] : ''}
+                          max={id < formData.periods.length ? findNextPeriods(id) : ''}
+                          className="form-control"
+                          placeholder="Task should be completed in a date till 12-00 UTC"
+                          aria-label="Due date"
+                          aria-describedby="basic-addon1"
+                          value={formData.periods[id]}
+                          onChange={(e) => handleChangeField('periods', e.target.value, id)}
+                          onBlur={(e) => handleBlurDate('periods', e.target.value, id)}
+                        />
                       </div>
-                    )}
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">
-                        USDT
-                      </span>
-                      <input
-                        type="number"
-                        step="1"
-                        id="prices"
-                        className="form-control"
-                        placeholder="Task Price"
-                        aria-label="Task Price"
-                        aria-describedby="basic-addon1"
-                        value={formData.prices[id]}
-                        onChange={(e) => handleChangeField('prices', e.target.value, id)}
-                        onBlur={(e) => handleBlurDate('prices', e.target.value, id)}
-                      />
+                      {errors.includes('periods') && (
+                        <div class="alert alert-danger px-1 py-0" role="alert">
+                          Please add hours.
+                        </div>
+                      )}
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                          USDT
+                        </span>
+                        <input
+                          type="number"
+                          step="1"
+                          id="prices"
+                          className="form-control"
+                          placeholder="Task Price"
+                          aria-label="Task Price"
+                          aria-describedby="basic-addon1"
+                          value={formData.prices[id]}
+                          onChange={(e) => handleChangeField('prices', e.target.value, id)}
+                          onBlur={(e) => handleBlurDate('prices', e.target.value, id)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
                 <div className="d-flex justify-content-between">
                   <button
                     type="button"

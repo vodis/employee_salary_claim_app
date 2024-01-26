@@ -16,3 +16,7 @@ export const getChainNameFromId = (chainId) => {
       return 'arbitrum one';
   }
 };
+
+export const onlyNumbers = (value) => {
+  return /^\d*\.?\d*$/.test(value) ? value : '';
+};

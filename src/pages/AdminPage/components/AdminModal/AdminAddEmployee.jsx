@@ -7,7 +7,7 @@ export const AdminAddEmployee = () => {
   });
 
   const handleAddEmployee = (fieldKey, fieldValue) => {
-      setFormData({ ...formData, [fieldKey]: fieldValue });
+    setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
   return (
