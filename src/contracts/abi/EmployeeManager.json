@@ -2,8 +2,13 @@
   {
     "inputs": [
       {
+        "internalType": "string",
+        "name": "nickname",
+        "type": "string"
+      },
+      {
         "internalType": "address",
-        "name": "employeeAddress",
+        "name": "addr",
         "type": "address"
       },
       {
@@ -13,16 +18,22 @@
       }
     ],
     "name": "addEmployee",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "string",
         "name": "",
-        "type": "address"
+        "type": "string"
       }
     ],
     "name": "employee",
@@ -41,6 +52,11 @@
         "internalType": "bool",
         "name": "isBlocked",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -49,14 +65,55 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "employeeAddress",
-        "type": "address"
+        "internalType": "string",
+        "name": "nickname",
+        "type": "string"
       }
     ],
     "name": "fired",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "nickname",
+        "type": "string"
+      }
+    ],
+    "name": "getEmployeeInfo",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "bool",
+            "name": "isProbationPassed",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isFired",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isBlocked",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "addr",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct EmployeeManager.Statuses",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   }
 ]

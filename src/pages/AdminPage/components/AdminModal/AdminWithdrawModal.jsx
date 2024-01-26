@@ -23,16 +23,16 @@ export const AdminWithdrawModal = ({ callback }) => {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="withdraw"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="withdrawLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="withdrawLabel">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="modal-title fs-5" id="withdrawLabel">
               Deposit
             </h1>
             <button
@@ -42,13 +42,13 @@ export const AdminWithdrawModal = ({ callback }) => {
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
+          <div className="modal-body">
             <h5>
               Are you sure? All available USDT will be transferred to owner account. All employee no
               longer be able claim from contract.
             </h5>
           </div>
-          <div class="d-flex gap-3 w-100 p-2">
+          <div className="d-flex gap-3 w-100 p-2">
             <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
               Close
             </button>

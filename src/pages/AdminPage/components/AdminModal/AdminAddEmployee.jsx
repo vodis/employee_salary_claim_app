@@ -12,17 +12,17 @@ export const AdminAddEmployee = () => {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="add-employee"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="addEmployee"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
+      <div className="modal-dialog">
+        <div className="modal-content">
           <form className="row g-3">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="addEmployee">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="addEmployee">
                 Add Employee
               </h1>
               <button
@@ -32,8 +32,8 @@ export const AdminAddEmployee = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <div class="input-group mb-3">
+            <div className="modal-body">
+              <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control"
@@ -44,7 +44,7 @@ export const AdminAddEmployee = () => {
                   // onChange={(e) => handleChangeField('title', e.target.value)}
                 />
               </div>
-              <div class="input-group mb-3">
+              <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control"
@@ -57,7 +57,7 @@ export const AdminAddEmployee = () => {
               </div>
             </div>
             <div className="p-2">
-              <div class="d-flex gap-3 w-100 p-2">
+              <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
                   Close
                 </button>

@@ -11,6 +11,7 @@ export const AdminAddTaskModal = ({ callback }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
+    nickname: '',
     periods: [],
     prices: []
   });
@@ -55,6 +56,7 @@ export const AdminAddTaskModal = ({ callback }) => {
     const values = [
       formData.title,
       formData.description,
+      formData.nickname,
       formData.periods.map((per) => {
         const inputDate = new Date(per + 'T00:00:00Z');
         inputDate.setUTCHours(12, 0, 0, 0);
@@ -80,17 +82,17 @@ export const AdminAddTaskModal = ({ callback }) => {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="add-task"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="addTaskLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
+      <div className="modal-dialog">
+        <div className="modal-content">
           <form className="row g-3">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="addTaskLabel">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="addTaskLabel">
                 Create Task
               </h1>
               <button
@@ -100,8 +102,8 @@ export const AdminAddTaskModal = ({ callback }) => {
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <div class="input-group mb-3">
+            <div className="modal-body">
+              <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control"
@@ -113,11 +115,12 @@ export const AdminAddTaskModal = ({ callback }) => {
                 />
               </div>
               {errors.includes('title') && (
-                <div class="alert alert-danger px-1 py-0" role="alert">
+                <div className="alert alert-danger px-1 py-0" role="alert">
                   Please add title.
                 </div>
               )}
-              <div class="input-group mb-3">
+
+              <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control"
@@ -129,8 +132,25 @@ export const AdminAddTaskModal = ({ callback }) => {
                 />
               </div>
               {errors.includes('description') && (
-                <div class="alert alert-danger px-1 py-0" role="alert">
+                <div className="alert alert-danger px-1 py-0" role="alert">
                   Please add description.
+                </div>
+              )}
+
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nickname"
+                  aria-label="Nickname"
+                  aria-describedby="basic-addon1"
+                  value={formData.nickname}
+                  onChange={(e) => handleChangeField('nickname', e.target.value)}
+                />
+              </div>
+              {errors.includes('nickname') && (
+                <div className="alert alert-danger px-1 py-0" role="alert">
+                  Please add nickname.
                 </div>
               )}
 
@@ -138,7 +158,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                 {[...Array(taskPeriods).keys()].map((id) => {
                   return (
                     <div key={id}>
-                      <div class="input-group mb-3">
+                      <div className="input-group mb-3">
                         <input
                           type="date"
                           min={id ? formData.periods[id - 1] : ''}
@@ -153,12 +173,12 @@ export const AdminAddTaskModal = ({ callback }) => {
                         />
                       </div>
                       {errors.includes('periods') && (
-                        <div class="alert alert-danger px-1 py-0" role="alert">
+                        <div className="alert alert-danger px-1 py-0" role="alert">
                           Please add hours.
                         </div>
                       )}
-                      <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">
+                      <div className="input-group mb-3">
+                        <span className="input-group-text" id="basic-addon1">
                           USDT
                         </span>
                         <input
@@ -195,13 +215,13 @@ export const AdminAddTaskModal = ({ callback }) => {
                 </div>
               </div>
               {errors.includes('prices') && (
-                <div class="alert alert-danger px-1 py-0" role="alert">
+                <div className="alert alert-danger px-1 py-0" role="alert">
                   Please add task price.
                 </div>
               )}
             </div>
             <div className="p-2">
-              <div class="d-flex gap-3 w-100 p-2">
+              <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
                   Close
                 </button>

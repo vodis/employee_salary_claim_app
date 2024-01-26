@@ -193,13 +193,13 @@ export const getRefContractForNickRead = async () => {
 };
 
 export const getRefContractForChargeVesting = (chainId, signer) => {
-  const address = '0x8b9d5A75328b5F3167b04B42AD00092E7d6c485c';
+  const address = '0xFD296cCDB97C605bfdE514e9810eA05f421DEBc2';
 
   return new ethers.Contract(address, abiRefForChargeVesting, signer);
 };
 
 export const getRefContractForTaskManager = (chainId, signer) => {
-  const address = '0x889D9A5AF83525a2275e41464FAECcCb3337fF60';
+  const address = '0xf274De14171Ab928A5Ec19928cE35FaD91a42B64';
 
   return new ethers.Contract(address, abiRefForTaskManager, signer);
 };

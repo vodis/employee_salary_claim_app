@@ -21,7 +21,7 @@ const AdminCard = () => {
 
         <div className="border border-success rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Create task</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Create task</p>
             <button
               type="button"
               data-bs-toggle="modal"
@@ -32,7 +32,7 @@ const AdminCard = () => {
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add assignee with rate</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add assignee with rate</p>
             <button
               type="button"
               data-bs-toggle="modal"
@@ -46,13 +46,15 @@ const AdminCard = () => {
 
         <div className="border border-danger rounded p-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Fire an employee</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Fire an employee</p>
             <button type="button" className="btn btn-danger flex-grow-2 flex-shrink-1">
               Fired
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p class="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Withdraw USDT from contract</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
+              Withdraw USDT from contract
+            </p>
             <button
               type="button"
               data-bs-toggle="modal"
