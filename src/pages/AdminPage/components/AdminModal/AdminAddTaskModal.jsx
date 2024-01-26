@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
 import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereumFunctions';
-import {BigNumber} from "ethers";
+import { BigNumber } from 'ethers';
 
 export const AdminAddTaskModal = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
@@ -11,19 +11,26 @@ export const AdminAddTaskModal = ({ callback }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    dueDate: '',
-    taskPrice: ''
+    periods: [],
+    prices: []
   });
   const [errors, setErrors] = useState([]);
+  const [taskPeriods, setTaskPeriods] = useState(0);
 
-  const handleChangeField = (fieldKey, fieldValue) => {
+  const handleChangeField = (fieldKey, fieldValue, fieldIndex) => {
+    if (['periods', 'prices'].includes(fieldKey)) {
+      const updateFormValues = [...formData[fieldKey]];
+      updateFormValues[fieldIndex] = fieldValue;
+      setFormData({ ...formData, [fieldKey]: updateFormValues });
+      return;
+    }
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
   const handleCreateTask = (e) => {
     e.preventDefault();
     const errors = Object.entries(formData)
-      .filter(([key, value]) => !value)
+      .filter(([key, value]) => !value || !value.length)
       .map(([key]) => key);
     if (errors.length) {
       return setErrors(errors);
@@ -47,8 +54,10 @@ export const AdminAddTaskModal = ({ callback }) => {
     const values = [
       formData.title,
       formData.description,
-      [BigNumber.from(new Date(new Date().getTime() + formData.dueDate * 60 * 60).getTime()).div(1000)],
-      [BigNumber.from(formData.taskPrice)]
+      formData.periods.map((per) => BigNumber.from(new Date(new Date().getTime() + per * 60 * 60).getTime()).div(
+          1000
+      )),
+      formData.prices.map((pr) => BigNumber.from(pr))
     ];
     const data = contract.interface.encodeFunctionData('addTask', values);
     // const gasLimit = await contract.estimateGas.addTask(values);
@@ -117,41 +126,66 @@ export const AdminAddTaskModal = ({ callback }) => {
                   Please add description.
                 </div>
               )}
-              <div class="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Task completion time in hours, like: 0.5 or any integer 40"
-                  aria-label="Due date"
-                  aria-describedby="basic-addon1"
-                  value={formData.dueDate}
-                  onChange={(e) => handleChangeField('dueDate', onlyNumbers(e.target.value))}
-                  onBlur={(e) => handleBlurDate('dueDate', e.target.value)}
-                />
-              </div>
-              {errors.includes('dueDate') && (
-                <div class="alert alert-danger px-1 py-0" role="alert">
-                  Please add hours.
+
+              <div className="border border-info rounded p-3 mb-3">
+                {[...Array(taskPeriods).keys()].map((id) => (
+                  <div key={id}>
+                    <div class="input-group mb-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Task completion time in hours, like: 0.5 or any integer 40"
+                        aria-label="Due date"
+                        aria-describedby="basic-addon1"
+                        value={formData.periods[id]}
+                        onChange={(e) =>
+                          handleChangeField('periods', onlyNumbers(e.target.value), id)
+                        }
+                        onBlur={(e) => handleBlurDate('periods', e.target.value, id)}
+                      />
+                    </div>
+                    {errors.includes('periods') && (
+                      <div class="alert alert-danger px-1 py-0" role="alert">
+                        Please add hours.
+                      </div>
+                    )}
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">
+                        USDT
+                      </span>
+                      <input
+                        type="number"
+                        step="1"
+                        id="prices"
+                        className="form-control"
+                        placeholder="Task Price"
+                        aria-label="Task Price"
+                        aria-describedby="basic-addon1"
+                        value={formData.prices[id]}
+                        onChange={(e) => handleChangeField('prices', e.target.value, id)}
+                        onBlur={(e) => handleBlurDate('prices', e.target.value, id)}
+                      />
+                    </div>
+                  </div>
+                ))}
+                <div className="d-flex justify-content-between">
+                  <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => !!taskPeriods && setTaskPeriods(taskPeriods - 1)}
+                  >
+                    - period
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setTaskPeriods(taskPeriods + 1)}
+                  >
+                    + period
+                  </button>
                 </div>
-              )}
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">
-                  USDT
-                </span>
-                <input
-                  type="number"
-                  step="1"
-                  id="taskPrice"
-                  className="form-control"
-                  placeholder="Task Price"
-                  aria-label="Task Price"
-                  aria-describedby="basic-addon1"
-                  value={formData.taskPrice}
-                  onChange={(e) => handleChangeField('taskPrice', e.target.value)}
-                  onBlur={(e) => handleBlurDate('taskPrice', e.target.value)}
-                />
               </div>
-              {errors.includes('taskPrice') && (
+              {errors.includes('prices') && (
                 <div class="alert alert-danger px-1 py-0" role="alert">
                   Please add task price.
                 </div>

@@ -1,0 +1,62 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "employeeAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "isProbation",
+        "type": "bool"
+      }
+    ],
+    "name": "addEmployee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "employee",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "isProbationPassed",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "isFired",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "isBlocked",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "employeeAddress",
+        "type": "address"
+      }
+    ],
+    "name": "fired",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

@@ -10,6 +10,11 @@
         "internalType": "address",
         "name": "_tManager",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_eManager",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
