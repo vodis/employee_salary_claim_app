@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import AdminCard from './components/AdminCard/AdminCard';
 import EmployeeCard from './components/EmployeeCard/EmployeeCard';
-import InfoCard from './components/InfoCard/InfoCard';
+import AdminInfoCard from './components/InfoCard/AdminInfoCard';
 import AdminModal from './components/AdminModal/AdminModal';
+import {DashboardInfoEmployee} from "./components/InfoCard/DashboardInfoEmployee";
 
 const AdminPage = () => {
   const [transaction, setTransaction] = useState(null);
@@ -26,17 +27,32 @@ const AdminPage = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-between m-4">
-          <InfoCard tx={transaction} receipt={receipt} />
+
+        <div class="container my-4">
+          <div className="row">
+            <div className="col-xs-auto col-lg-6">
+              <AdminInfoCard tx={transaction} receipt={receipt} />
+            </div>
+            <div className="col-xs-auto col-lg-6">
+              <DashboardInfoEmployee/>
+            </div>
+          </div>
         </div>
-        <div className="d-flex justify-content-between m-4 gap-4 flex-wrap">
-          <AdminCard
-            callback={(transaction, receipt) => {
-              setTransaction(transaction);
-              setReceipt(receipt);
-            }}
-          />
-          <EmployeeCard />
+
+        <div class="container">
+          <div className="row">
+            <div className="col-xs-auto col-lg-6">
+              <AdminCard
+                callback={(transaction, receipt) => {
+                  setTransaction(transaction);
+                  setReceipt(receipt);
+                }}
+              />
+            </div>
+            <div className="col-xs-auto col-lg-6">
+              <EmployeeCard />
+            </div>
+          </div>
         </div>
       </div>
 

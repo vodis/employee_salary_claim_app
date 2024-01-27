@@ -32,7 +32,7 @@ const AdminCard = ({ callback }) => {
   };
 
   return (
-    <div className="card">
+    <div className="card w-100">
       <div className="card-body">
         <h5 className="card-title text-center">Admin Section</h5>
 
