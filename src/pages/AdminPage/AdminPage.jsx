@@ -30,7 +30,12 @@ const AdminPage = () => {
           <InfoCard tx={transaction} receipt={receipt} />
         </div>
         <div className="d-flex justify-content-between m-4 gap-4 flex-wrap">
-          <AdminCard />
+          <AdminCard
+            callback={(transaction, receipt) => {
+              setTransaction(transaction);
+              setReceipt(receipt);
+            }}
+          />
           <EmployeeCard />
         </div>
       </div>

@@ -88,8 +88,17 @@ export const AdminAddEmployee = ({ callback }) => {
               </div>
               <div className="input-group mb-3">
                 <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
-                  <input className="form-check-input m-0" type="checkbox" id="isProbation" checked={formData.isProbation} onChange={(e) => handleChangeField('isProbation', e.target.checked)} aria-label="isProbation" />
-                  <label className="form-check-label w-auto h-auto m-0" htmlFor="isProbation">Is probation period</label>
+                  <input
+                    className="form-check-input m-0"
+                    type="checkbox"
+                    id="isProbation"
+                    checked={formData.isProbation}
+                    onChange={(e) => handleChangeField('isProbation', e.target.checked)}
+                    aria-label="isProbation"
+                  />
+                  <label className="form-check-label w-auto h-auto m-0" htmlFor="isProbation">
+                    Is probation period
+                  </label>
                 </div>
               </div>
             </div>
