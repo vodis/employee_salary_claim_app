@@ -28,7 +28,7 @@ const AdminPage = () => {
           </div>
         </div>
 
-        <div class="container my-4">
+        <div className="container my-4">
           <div className="row">
             <div className="col-xs-auto col-lg-6">
               <AdminInfoCard tx={transaction} receipt={receipt} />
@@ -39,7 +39,7 @@ const AdminPage = () => {
           </div>
         </div>
 
-        <div class="container">
+        <div className="container">
           <div className="row">
             <div className="col-xs-auto col-lg-6">
               <AdminCard
