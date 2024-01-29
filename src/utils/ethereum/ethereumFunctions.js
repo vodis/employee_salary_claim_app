@@ -201,7 +201,11 @@ export const getRefContractForChargeVesting = (chainId, signer) => {
         signer
       );
     case 31337:
-      return new ethers.Contract('', abiRefForChargeVesting, signer);
+      return new ethers.Contract(
+        '0x42dd1Ca4E64D116b4Dc424a4abA542C56CebF83a',
+        abiRefForChargeVesting,
+        signer
+      );
     default:
       throw new Error('Opps!');
   }
@@ -216,7 +220,11 @@ export const getRefContractForTaskManager = (chainId, signer) => {
         signer
       );
     case 31337:
-      return new ethers.Contract('', abiRefForTaskManager, signer);
+      return new ethers.Contract(
+        '0xe63d718b430A54Ef1021cdCCab20dE51db82bA5e',
+        abiRefForTaskManager,
+        signer
+      );
     default:
       throw new Error('Opps!');
   }
@@ -231,7 +239,11 @@ export const getRefContractForEmployeeManager = (chainId, signer) => {
         signer
       );
     case 31337:
-      return new ethers.Contract('', abiRefForEmployeeManager, signer);
+      return new ethers.Contract(
+        '0xFDFbe5f392f172ca0d4C787c6DCcecf2e5bc8e90',
+        abiRefForEmployeeManager,
+        signer
+      );
     default:
       throw new Error('Opps!');
   }
@@ -246,7 +258,11 @@ export const getRefContractForEmployeeRateModel = (chainId, signer) => {
         signer
       );
     case 31337:
-      return new ethers.Contract('', abiRefForEmployeeRateModel, signer);
+      return new ethers.Contract(
+        '0x9c2CB6AF3287A54dB6c3FcbfCF710cbA41B7c805',
+        abiRefForEmployeeRateModel,
+        signer
+      );
     default:
       throw new Error('Opps!');
   }
