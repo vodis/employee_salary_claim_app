@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const AdminInfoCard = ({ tx, receipt }) => {
+const AdminInfoCard = ({ tx, receipt, read }) => {
   const [formData, setFormData] = useState({
     isOnlyLogs: true
   });
@@ -28,7 +28,7 @@ const AdminInfoCard = ({ tx, receipt }) => {
         {formData.isOnlyLogs ? (
           <>
             <h5 className="card-title mb-2">Logs:</h5>
-            <pre>{JSON.stringify(tx?.logs || null, null, 2)}</pre>
+            <pre>{JSON.stringify(read || receipt?.logs || null, null, 2)}</pre>
           </>
         ) : (
           <>

@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereumFunctions';
+import {
+  getRefContractForTaskManager,
+  getRefContractForEmployeeManager
+} from '../../../../utils/ethereum/ethereumFunctions';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
+import { utils } from 'ethers';
+import { getTaskInfoLibResponse } from './libResponse';
 
 const AdminCard = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
@@ -15,6 +20,22 @@ const AdminCard = ({ callback }) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
+  const handleGetEmployees = async () => {
+    const contract = getRefContractForEmployeeManager(chainId, signer);
+    const data = contract.interface.encodeFunctionData('getAllEmployeeNicknames', []);
+    const gasLimit = await contract.estimateGas.getAllEmployeeNicknames();
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit.mul(2)
+    };
+
+    const result = await signer.call(tx);
+    const decodedResult = utils.defaultAbiCoder.decode(['string[]'], result);
+
+    callback(null, null, decodedResult);
+  };
+
   const handleGetTaskInfo = async () => {
     const contract = getRefContractForTaskManager(chainId, signer);
     const data = contract.interface.encodeFunctionData('getTaskInfo', [formData.taskId]);
@@ -25,16 +46,27 @@ const AdminCard = ({ callback }) => {
       gasLimit: gasLimit * 2
     };
 
-    const transaction = await signer.call(tx);
-    const receipt = await transaction.wait();
+    const result = await signer.call(tx);
+    const read = getTaskInfoLibResponse(result);
 
-    callback(transaction, receipt);
+    callback(null, null, read);
   };
 
   return (
     <div className="card w-100">
       <div className="card-body">
         <h5 className="card-title text-center">Admin Section</h5>
+
+        <div className="d-flex align-items-center gap-2 mb-2">
+          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Get employees list</p>
+          <button
+            type="button"
+            className="btn btn-light flex-grow-2 flex-shrink-1"
+            onClick={handleGetEmployees}
+          >
+            Get employees
+          </button>
+        </div>
 
         <div className="d-flex align-items-center gap-2 mb-3">
           <div className="flex-grow-1 flex-shrink-1">

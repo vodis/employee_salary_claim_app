@@ -8,6 +8,13 @@ import { DashboardInfoEmployee } from './components/InfoCard/DashboardInfoEmploy
 const AdminPage = () => {
   const [transaction, setTransaction] = useState(null);
   const [receipt, setReceipt] = useState(null);
+  const [read, setRead] = useState(null);
+
+  const handleCallback = (transaction, receipt, read) => {
+    setTransaction(transaction);
+    setReceipt(receipt);
+    setRead(read);
+  };
 
   return (
     <section className="page">
@@ -31,7 +38,7 @@ const AdminPage = () => {
         <div className="container my-4">
           <div className="row">
             <div className="col-xs-auto col-lg-6">
-              <AdminInfoCard tx={transaction} receipt={receipt} />
+              <AdminInfoCard tx={transaction} receipt={receipt} read={read} />
             </div>
             <div className="col-xs-auto col-lg-6">
               <DashboardInfoEmployee />
@@ -42,31 +49,16 @@ const AdminPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-xs-auto col-lg-6">
-              <AdminCard
-                callback={(transaction, receipt) => {
-                  setTransaction(transaction);
-                  setReceipt(receipt);
-                }}
-              />
+              <AdminCard callback={handleCallback} />
             </div>
             <div className="col-xs-auto col-lg-6">
-              <EmployeeCard
-                callback={(transaction, receipt) => {
-                  setTransaction(transaction);
-                  setReceipt(receipt);
-                }}
-              />
+              <EmployeeCard callback={handleCallback} />
             </div>
           </div>
         </div>
       </div>
 
-      <AdminModal
-        callback={(transaction, receipt) => {
-          setTransaction(transaction);
-          setReceipt(receipt);
-        }}
-      />
+      <AdminModal callback={handleCallback} />
     </section>
   );
 };
