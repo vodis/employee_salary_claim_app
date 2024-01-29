@@ -8,17 +8,17 @@ const EmployeeCard = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [formData, setFormData] = useState({
-    taskId: ''
+    nickname: ''
   });
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
-  const handleClaimByTaskId = async () => {
+  const handleClaimByNickname = async () => {
     const contract = getRefContractForChargeVesting(chainId, signer);
-    const data = contract.interface.encodeFunctionData('claim', [formData.taskId]);
-    const gasLimit = await contract.estimateGas.claim(formData.taskId);
+    const data = contract.interface.encodeFunctionData('claim', [formData.nickname]);
+    const gasLimit = await contract.estimateGas.claim(formData.nickname);
     const tx = {
       to: contract.address,
       data,
@@ -35,32 +35,25 @@ const EmployeeCard = ({ callback }) => {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title text-center">Employee Section</h5>
-        <div className="d-flex align-items-center gap-2 mb-3">
-          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-            Claim all <b>available</b> tokens
-          </p>
-          <button type="button" className="btn btn-primary flex-grow-2 flex-shrink-1">
-            ClaimAll
-          </button>
-        </div>
+
         <div className="d-flex align-items-center gap-2 mb-3">
           <div className="flex-grow-1 flex-shrink-1">
             <input
               type="text"
               className="form-control"
-              placeholder="Fill in Task ID"
-              aria-label="taskId"
-              aria-describedby="taskId"
-              value={formData.taskId}
-              onChange={(e) => handleChangeField('taskId', e.target.value)}
+              placeholder="Fill in your nickname"
+              aria-label="nickname"
+              aria-describedby="nickname"
+              value={formData.nickname}
+              onChange={(e) => handleChangeField('nickname', e.target.value)}
             />
           </div>
           <button
             type="button"
-            className="btn btn-light flex-grow-2 flex-shrink-1"
-            onClick={handleClaimByTaskId}
+            className="btn btn-primary flex-grow-2 flex-shrink-1"
+            onClick={handleClaimByNickname}
           >
-            ClaimOne
+            Claim
           </button>
         </div>
       </div>
