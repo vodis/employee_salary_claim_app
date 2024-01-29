@@ -36,7 +36,7 @@ export const getTaskInfoLibResponse = (result) => {
     result
   );
 
-  const [meta, statuses, additionalInfo, array1, array2] = decodedResult;
+  const [meta, statuses, nickname, array1, array2] = decodedResult;
 
   // Convert BigNumber values to numbers
   const taskId = meta[0].toNumber();
@@ -44,9 +44,8 @@ export const getTaskInfoLibResponse = (result) => {
   const isTaskStopped = statuses[1];
   const isTaskDone = statuses[2];
   const isAlphaStageDone = statuses[3];
-  const additionalStringInfo = additionalInfo;
-  const uint256Array1 = array1.map((item) => item.toNumber());
-  const uint256Array2 = array2.map((item) => item.toNumber());
+  const dates = array1.map((item) => item.toNumber());
+  const prices = array2.map((item) => item.toNumber());
 
   // Organize the enhanced response
   return {
@@ -57,8 +56,8 @@ export const getTaskInfoLibResponse = (result) => {
     isTaskStopped,
     isTaskDone,
     isAlphaStageDone,
-    additionalStringInfo,
-    uint256Array1,
-    uint256Array2
+    nickname,
+    dates,
+    prices
   };
 };

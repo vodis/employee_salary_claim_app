@@ -13,7 +13,8 @@ const AdminCard = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [formData, setFormData] = useState({
-    taskId: ''
+    taskId: '',
+    nickname: '',
   });
 
   const handleChangeField = (fieldKey, fieldValue) => {
@@ -52,19 +53,35 @@ const AdminCard = ({ callback }) => {
     callback(null, null, read);
   };
 
+  const handleGetTaskIds = async () => {
+    const contract = getRefContractForTaskManager(chainId, signer);
+    const data = contract.interface.encodeFunctionData('getTaskIdsByNickname', [formData.nickname]);
+    const gasLimit = await contract.estimateGas.getTaskIdsByNickname(formData.nickname);
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit * 2
+    };
+
+    const result = await signer.call(tx);
+    const decodedResult = utils.defaultAbiCoder.decode(['uint256[]'], result)?.map((bN) => bN.toString());
+
+    callback(null, null, decodedResult);
+  }
+
   return (
     <div className="card w-100">
       <div className="card-body">
         <h5 className="card-title text-center">Admin Section</h5>
 
         <div className="d-flex align-items-center gap-2 mb-2">
-          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Get employees list</p>
+          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Get employees list nicknames</p>
           <button
             type="button"
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetEmployees}
           >
-            Get employees
+            Get Employees
           </button>
         </div>
 
@@ -85,7 +102,28 @@ const AdminCard = ({ callback }) => {
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetTaskInfo}
           >
-            Task Info
+            Get TaskInfo by Id
+          </button>
+        </div>
+
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <div className="flex-grow-1 flex-shrink-1">
+            <input
+                type="text"
+                className="form-control"
+                placeholder="Fill in Employee nickname"
+                aria-label="nickname"
+                aria-describedby="nickname"
+                value={formData.nickname}
+                onChange={(e) => handleChangeField('nickname', e.target.value)}
+            />
+          </div>
+          <button
+              type="button"
+              className="btn btn-light flex-grow-2 flex-shrink-1"
+              onClick={handleGetTaskIds}
+          >
+            Get Task Ids by nickname
           </button>
         </div>
 

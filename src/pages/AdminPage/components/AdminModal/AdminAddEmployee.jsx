@@ -25,7 +25,7 @@ export const AdminAddEmployee = ({ callback }) => {
 
   const handleSendTransaction = async () => {
     const contract = getRefContractForEmployeeManager(chainId, signer);
-    const values = [formData.nickname, formData.address, formData.isProbation];
+    const values = [formData.nickname.toLowerCase(), formData.address, formData.isProbation];
     const data = contract.interface.encodeFunctionData('addEmployee', values);
 
     const gasLimit = await contract.estimateGas.addEmployee(...values);
