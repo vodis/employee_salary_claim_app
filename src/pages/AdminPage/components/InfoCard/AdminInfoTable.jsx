@@ -14,11 +14,11 @@ const AdminInfoTable = () => {
     },
     {
       id: 'taskInWork',
-      title: 'Task in work'
+      title: 'Tasks in work'
     },
     {
-      id: 'taskInBlocked',
-      title: 'Task in blocked'
+      id: 'isApproved',
+      title: 'Tasks approved'
     },
     {
       id: 'fired',
@@ -31,7 +31,7 @@ const AdminInfoTable = () => {
       nickname: 'vodis',
       created: new Date().getTime(),
       taskInWork: 6,
-      taskInBlocked: 0,
+      isApproved: 0,
       fired: null
     }
   ];
