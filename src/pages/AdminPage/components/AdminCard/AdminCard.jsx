@@ -156,10 +156,29 @@ const AdminCard = ({ callback }) => {
           </div>
         </div>
 
+        <div className="border border-warning rounded p-3 mb-3">
+          <div className="d-flex align-items-center gap-2 mb-2">
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Alpha Stage has been done</p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#approve-stage"
+              className="btn btn-warning flex-grow-2 flex-shrink-1"
+            >
+              Approve stage
+            </button>
+          </div>
+        </div>
+
         <div className="border border-danger rounded p-3">
           <div className="d-flex align-items-center gap-2 mb-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Fire an employee</p>
-            <button type="button" className="btn btn-danger flex-grow-2 flex-shrink-1">
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#fired-employee"
+              className="btn btn-danger flex-grow-2 flex-shrink-1"
+            >
               Fired
             </button>
           </div>
