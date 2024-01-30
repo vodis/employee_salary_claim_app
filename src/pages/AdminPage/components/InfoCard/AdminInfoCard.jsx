@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AdminInfoTable from './AdminInfoTable';
 
 const AdminInfoCard = ({ tx, receipt, read }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const AdminInfoCard = ({ tx, receipt, read }) => {
   return (
     <div className="card w-100 h-100">
       <div className="card-body">
+        <AdminInfoTable />
+
         <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
           <input
             className="form-check-input m-0"

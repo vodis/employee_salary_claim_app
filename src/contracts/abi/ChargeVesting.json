@@ -111,9 +111,9 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "taskId",
-        "type": "uint256"
+        "internalType": "string",
+        "name": "nickname",
+        "type": "string"
       }
     ],
     "name": "claim",
