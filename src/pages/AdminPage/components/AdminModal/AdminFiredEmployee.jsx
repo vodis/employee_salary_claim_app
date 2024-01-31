@@ -23,10 +23,10 @@ export const AdminFiredEmployee = ({ callback }) => {
 
   const handleSendTransaction = async () => {
     const contract = getRefContractForEmployeeManager(chainId, signer);
-    const values = [formData.nickname.toLowerCase(), formData.address, formData.isProbation];
-    const data = contract.interface.encodeFunctionData('addEmployee', values);
+    const values = [formData.nickname.toLowerCase()];
+    const data = contract.interface.encodeFunctionData('fired', values);
 
-    const gasLimit = await contract.estimateGas.addEmployee(...values);
+    const gasLimit = await contract.estimateGas.fired(...values);
     const tx = {
       to: contract.address,
       data,
