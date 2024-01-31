@@ -88,24 +88,29 @@ export const DashboardInfoEmployee = () => {
         </div>
         <div className="d-flex flex-column mb-2">
           <div className="d-flex justify-content-between">
-            <span>Count of Open Tasks:</span>
+            <span>Total open tasks:</span>
             <span>null</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Count of Blocked Tasks:</span>
+            <span>Total blocked tasks:</span>
             <span>null</span>
           </div>
-          <div className="d-flex justify-content-between">
-            <span>Total Available to Claim now:</span>
+          <div className="d-flex justify-content-between mb-4">
+            <span>Total successful finished tasks:</span>
             <span>null</span>
           </div>
+
           <div className="d-flex justify-content-between">
-            <span>Total will be available for request on the 5th:</span>
-            <span>null</span>
+            <span>Total available to claim:</span>
+            <span>$</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Total Locked in all Task (exclude total available):</span>
-            <span>null</span>
+            <span>Will be available to claim on the 5th:</span>
+            <span>$</span>
+          </div>
+          <div className="d-flex justify-content-between">
+            <span>Blocked in tasks:</span>
+            <span>$</span>
           </div>
         </div>
 

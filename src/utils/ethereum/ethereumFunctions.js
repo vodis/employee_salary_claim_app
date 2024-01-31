@@ -202,7 +202,7 @@ export const getRefContractForChargeVesting = (chainId, signer) => {
       );
     case 31337:
       return new ethers.Contract(
-        '0x16F3365856A8Db634f6e3db0a8e88d6e714204C2',
+        '0xe81d75Ff04bB2fc0C0C6df9178EAb4Fcc11E4E97',
         abiRefForChargeVesting,
         signer
       );
@@ -221,7 +221,7 @@ export const getRefContractForTaskManager = (chainId, signer) => {
       );
     case 31337:
       return new ethers.Contract(
-        '0x03D1b387fD93E21dD7a39788a14e8DFeae437ede',
+        '0xB51f5a1cC7A17675B80E1d5BFB931F56c65AA3B1',
         abiRefForTaskManager,
         signer
       );
@@ -240,7 +240,7 @@ export const getRefContractForEmployeeManager = (chainId, signer) => {
       );
     case 31337:
       return new ethers.Contract(
-        '0x01D711c6EcAA04b080D6ea5087AEd69ffe1B6903',
+        '0x389e4bbdC0B860ef683be19589D80bbffBa34918',
         abiRefForEmployeeManager,
         signer
       );
