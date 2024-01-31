@@ -38,7 +38,7 @@ export const DashboardInfoEmployee = () => {
       return;
     }
     const contract = getRefContractForTaskManager(chainId, signer);
-    const filter = contract.filters.eLog1();
+    const filter = contract.filters.eLog();
     const events = await contract.queryFilter(filter);
 
     if (events) {

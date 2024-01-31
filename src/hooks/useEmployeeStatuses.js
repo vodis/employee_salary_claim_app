@@ -21,7 +21,7 @@ export const useEmployeeStatuses = () => {
     }
     const iId = setInterval(async () => {
       const contract = getRefContractForEmployeeManager(chainId, signer);
-      const filter = contract.filters.eLog1();
+      const filter = contract.filters.eLog();
       const events = await contract.queryFilter(filter);
 
       if (events) {
