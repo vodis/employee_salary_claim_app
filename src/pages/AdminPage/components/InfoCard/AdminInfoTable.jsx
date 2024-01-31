@@ -41,7 +41,7 @@ const AdminInfoTable = ({ d }) => {
             </tr>
           </thead>
           <tbody>
-            {d.map((data, i) => (
+            {d?.map((data, i) => (
               <tr key={`d-${i}`}>
                 {h.map((name, j) =>
                   j === 0 ? (

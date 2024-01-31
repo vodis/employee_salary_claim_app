@@ -7,7 +7,7 @@ const AdminInfoCard = ({ tx, receipt, read }) => {
     isOnlyLogs: true
   });
   const { employeesInfo } = useEmployeeStatuses();
-  console.log(employeesInfo, '<<<<');
+
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
