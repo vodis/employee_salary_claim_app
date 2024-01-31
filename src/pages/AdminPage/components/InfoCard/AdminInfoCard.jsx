@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import AdminInfoTable from './AdminInfoTable';
+import { useEmployeeStatuses } from '../../../../hooks/useEmployeeStatuses';
 
 const AdminInfoCard = ({ tx, receipt, read }) => {
   const [formData, setFormData] = useState({
     isOnlyLogs: true
   });
-
+  const { employeesInfo } = useEmployeeStatuses();
+  console.log(employeesInfo, '<<<<');
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
@@ -13,7 +15,7 @@ const AdminInfoCard = ({ tx, receipt, read }) => {
   return (
     <div className="card w-100 h-100">
       <div className="card-body">
-        <AdminInfoTable />
+        <AdminInfoTable d={employeesInfo} />
 
         <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
           <input

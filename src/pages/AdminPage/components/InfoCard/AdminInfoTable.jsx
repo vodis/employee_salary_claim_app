@@ -1,4 +1,4 @@
-const AdminInfoTable = () => {
+const AdminInfoTable = ({ d }) => {
   const h = [
     {
       id: 'id',
@@ -23,16 +23,6 @@ const AdminInfoTable = () => {
     {
       id: 'fired',
       title: 'Fired'
-    }
-  ];
-
-  const d = [
-    {
-      nickname: 'vodis',
-      created: new Date().getTime(),
-      taskInWork: 6,
-      isApproved: 0,
-      fired: null
     }
   ];
 

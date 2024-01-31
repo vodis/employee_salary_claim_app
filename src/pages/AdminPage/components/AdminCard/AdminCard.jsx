@@ -66,7 +66,7 @@ const AdminCard = ({ callback }) => {
     const result = await signer.call(tx);
     const decodedResult = utils.defaultAbiCoder
       .decode(['uint256[]'], result)
-      ?.map((bN) => bN.toString());
+      ?.map((el) => el.toString());
 
     callback(null, null, decodedResult);
   };
