@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getRefContractForEmployeeManager } from '../../../../utils/ethereum/ethereumFunctions';
+import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereumFunctions';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
@@ -22,11 +22,11 @@ export const AdminApproveStage = ({ callback }) => {
   };
 
   const handleSendTransaction = async () => {
-    const contract = getRefContractForEmployeeManager(chainId, signer);
-    const values = [formData.nickname.toLowerCase(), formData.address, formData.isProbation];
-    const data = contract.interface.encodeFunctionData('addEmployee', values);
+    const contract = getRefContractForTaskManager(chainId, signer);
+    const values = [formData.taskId];
+    const data = contract.interface.encodeFunctionData('approveTaskById', values);
 
-    const gasLimit = await contract.estimateGas.addEmployee(...values);
+    const gasLimit = await contract.estimateGas.approveTaskById(...values);
     const tx = {
       to: contract.address,
       data,

@@ -17,15 +17,17 @@ const EmployeeCard = ({ callback }) => {
 
   const handleClaimByNickname = async () => {
     const contract = getRefContractForChargeVesting(chainId, signer);
-    const data = contract.interface.encodeFunctionData('claim', [formData.nickname]);
-    const gasLimit = await contract.estimateGas.claim(formData.nickname);
+    const values = [formData.nickname];
+    const data = contract.interface.encodeFunctionData('claim', values);
+
+    const gasLimit = await contract.estimateGas.claim(...values);
     const tx = {
       to: contract.address,
       data,
       gasLimit: gasLimit * 2
     };
 
-    const transaction = await signer.sendTransactions(tx);
+    const transaction = await signer.sendTransaction(tx);
     const receipt = await transaction.wait();
 
     callback(transaction, receipt);

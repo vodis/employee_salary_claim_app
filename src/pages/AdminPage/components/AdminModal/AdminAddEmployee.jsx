@@ -108,7 +108,7 @@ export const AdminAddEmployee = ({ callback }) => {
                   Close
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleAddEmployee}>
-                  Add Task
+                  Add Employee
                 </button>
               </div>
             </div>

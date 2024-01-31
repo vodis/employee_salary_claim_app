@@ -31,12 +31,13 @@ export const getTaskInfoLibResponse = (result) => {
       // Array of uint256
       'uint256[]',
       // Array of uint256
-      'uint256[]'
+      'uint256[]',
+      'bool[]'
     ],
     result
   );
 
-  const [meta, statuses, nickname, array1, array2] = decodedResult;
+  const [meta, statuses, nickname, array1, array2, array3] = decodedResult;
 
   // Convert BigNumber values to numbers
   const taskId = meta[0].toNumber();
@@ -46,6 +47,7 @@ export const getTaskInfoLibResponse = (result) => {
   const isAlphaStageDone = statuses[3];
   const dates = array1.map((item) => item.toNumber());
   const prices = array2.map((item) => item.toNumber());
+  const isAlreadyPaidPeriod = array3.map((item) => item);
 
   // Organize the enhanced response
   return {
@@ -58,6 +60,7 @@ export const getTaskInfoLibResponse = (result) => {
     isAlphaStageDone,
     nickname,
     dates,
-    prices
+    prices,
+    isAlreadyPaidPeriod
   };
 };
