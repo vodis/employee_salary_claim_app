@@ -231,19 +231,6 @@
   },
   {
     "inputs": [],
-    "name": "BlkDeploy",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "DEFAULT_ADMIN_ROLE",
     "outputs": [
       {
@@ -313,6 +300,11 @@
     ],
     "name": "employee",
     "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
       {
         "internalType": "bool",
         "name": "isProbationPassed",
@@ -395,6 +387,11 @@
       {
         "components": [
           {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
             "internalType": "bool",
             "name": "isProbationPassed",
             "type": "bool"
@@ -418,6 +415,25 @@
         "internalType": "struct EmployeeManager.Statuses",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "name": "getEmployeeNicknameByWallet",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "nickname",
+        "type": "string"
       }
     ],
     "stateMutability": "view",

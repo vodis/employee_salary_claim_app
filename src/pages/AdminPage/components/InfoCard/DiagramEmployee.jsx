@@ -8,6 +8,11 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+const DEFAULT_DIAGRAM = [
+  { date: '2024-01-01', price: 0 },
+  { date: '2024-04-01', price: 0 }
+];
+
 const DiagramEmployee = ({ d }) => {
   return (
     <div>
@@ -36,7 +41,7 @@ const DiagramEmployee = ({ d }) => {
       </div>
       <div style={{ height: 300 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={d}>
+          <LineChart data={d.length ? d : DEFAULT_DIAGRAM}>
             <Line type="monotone" dataKey="price" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
             <XAxis dataKey="date" />

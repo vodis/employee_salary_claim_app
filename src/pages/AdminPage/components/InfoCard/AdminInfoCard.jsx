@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import AdminInfoTable from './AdminInfoTable';
-import { useEmployeeStatuses } from '../../../../hooks/useEmployeeStatuses';
+// import { useEmployeeStatuses } from '../../../../hooks/useEmployeeStatuses';
 
 const AdminInfoCard = ({ tx, receipt, read }) => {
   const [formData, setFormData] = useState({
     isOnlyLogs: true
   });
-  const { employeesInfo } = useEmployeeStatuses();
+  // const { employeesInfo } = useEmployeeStatuses();
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -28,7 +28,7 @@ const AdminInfoCard = ({ tx, receipt, read }) => {
           </li>
         </ul>
 
-        <AdminInfoTable d={employeesInfo} />
+        <AdminInfoTable d={[]} />
 
         <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
           <input
