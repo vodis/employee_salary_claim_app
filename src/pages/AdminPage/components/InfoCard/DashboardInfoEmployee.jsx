@@ -76,10 +76,8 @@ export const DashboardInfoEmployee = () => {
             aria-label="users"
             onChange={(e) => handleChangeDiagram('users', e.target.value)}
           >
-            <option selected value={''}>
-              Select nickname
-            </option>
-            {formData.users.map(({ nickname, selected }) => (
+            <option value={''}>Select nickname</option>
+            {formData.users.map(({ nickname }) => (
               <option key={nickname} value={nickname}>
                 {nickname}
               </option>

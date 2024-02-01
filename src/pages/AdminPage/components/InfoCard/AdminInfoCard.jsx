@@ -15,7 +15,7 @@ const AdminInfoCard = ({ tx, receipt, read }) => {
   return (
     <div className="card w-100 h-100">
       <div className="card-body">
-        <ul class="nav nav-tabs mb-4">
+        <ul className="nav nav-tabs mb-4">
           <li className="nav-item">
             <a className="nav-link active" aria-current="page" href="#">
               Admin Info
