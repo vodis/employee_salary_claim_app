@@ -196,7 +196,7 @@ export const getRefContractForChargeVesting = (chainId, signer) => {
   switch (chainId) {
     case 1337:
       return new ethers.Contract(
-        '0xCd9BC6cE45194398d12e27e1333D5e1d783104dD',
+        '0x057cD3082EfED32d5C907801BF3628B27D88fD80',
         abiRefForChargeVesting,
         signer
       );
@@ -207,7 +207,7 @@ export const getRefContractForChargeVesting = (chainId, signer) => {
         signer
       );
     default:
-      throw new Error('Opps!');
+      throw new Error('RPC-ERROR: at function getRefContractForChargeVesting');
   }
 };
 
@@ -215,7 +215,7 @@ export const getRefContractForTaskManager = (chainId, signer) => {
   switch (chainId) {
     case 1337:
       return new ethers.Contract(
-        '0x2B64822cf4bbDd77d386F51AA2B40c5cdbeb80b5',
+        '0xF357118EBd576f3C812c7875B1A1651a7f140E9C',
         abiRefForTaskManager,
         signer
       );
@@ -226,7 +226,7 @@ export const getRefContractForTaskManager = (chainId, signer) => {
         signer
       );
     default:
-      throw new Error('Opps!');
+      throw new Error('RPC-ERROR: at function getRefContractForTaskManager');
   }
 };
 
@@ -234,7 +234,7 @@ export const getRefContractForEmployeeManager = (chainId, signer) => {
   switch (chainId) {
     case 1337:
       return new ethers.Contract(
-        '0xAAd4F7BB5FB661181D500829e60010043833a85B',
+        '0x15F2ea83eB97ede71d84Bd04fFF29444f6b7cd52',
         abiRefForEmployeeManager,
         signer
       );
@@ -245,7 +245,7 @@ export const getRefContractForEmployeeManager = (chainId, signer) => {
         signer
       );
     default:
-      throw new Error('Opps!');
+      throw new Error('RPC-ERROR: at function getRefContractForEmployeeManager');
   }
 };
 
@@ -264,6 +264,6 @@ export const getRefContractForEmployeeRateModel = (chainId, signer) => {
         signer
       );
     default:
-      throw new Error('Opps!');
+      throw new Error('RPC-ERROR: at function getRefContractForEmployeeRateModel');
   }
 };

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import AdminCard from './components/AdminCard/AdminCard';
-import EmployeeCard from './components/EmployeeCard/EmployeeCard';
-import AdminInfoCard from './components/InfoCard/AdminInfoCard';
+import EmployeeInfoCard from './components/EmployeeInfoCard/EmployeeInfoCard';
+import AdminInfoCard from './components/AdminInfoCard/AdminInfoCard';
 import AdminModal from './components/AdminModal/AdminModal';
-import { DashboardInfoEmployee } from './components/InfoCard/DashboardInfoEmployee';
+import { DashboardInfoEmployee } from './components/AdminInfoCard/DashboardInfoEmployee';
 
 const AdminPage = () => {
   const [transaction, setTransaction] = useState(null);
@@ -52,7 +52,7 @@ const AdminPage = () => {
               <AdminCard callback={handleCallback} />
             </div>
             <div className="col-xs-auto col-lg-6">
-              <EmployeeCard callback={handleCallback} />
+              <EmployeeInfoCard callback={handleCallback} />
             </div>
           </div>
         </div>

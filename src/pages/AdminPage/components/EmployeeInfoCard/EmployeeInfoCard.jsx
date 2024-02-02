@@ -3,7 +3,7 @@ import { useAddTaskEvent } from '../../../../hooks/useAddTaskEvent';
 import { useEffect, useState } from 'react';
 import { useGetNicknameByWalletEvent } from '../../../../hooks/useGetNicknameByWalletEvent';
 
-const EmployeeCard = ({ callback }) => {
+const EmployeeInfoCard = ({ callback }) => {
   const { tasks: allTasks } = useAddTaskEvent();
   const { nickname } = useGetNicknameByWalletEvent();
   const [tasksByEmployee, setTasksByEmployee] = useState([]);
@@ -36,4 +36,4 @@ const EmployeeCard = ({ callback }) => {
   );
 };
 
-export default EmployeeCard;
+export default EmployeeInfoCard;

@@ -3,6 +3,7 @@ import { getRefContractForEmployeeManager } from '../../../../utils/ethereum/eth
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
+import { useNotifications } from '../../../../providers/Notifications';
 
 export const AdminAddEmployee = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
@@ -12,6 +13,7 @@ export const AdminAddEmployee = ({ callback }) => {
     address: '',
     isProbation: true
   });
+  const { alert } = useNotifications();
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -24,21 +26,25 @@ export const AdminAddEmployee = ({ callback }) => {
   };
 
   const handleSendTransaction = async () => {
-    const contract = getRefContractForEmployeeManager(chainId, signer);
-    const values = [formData.nickname.toLowerCase(), formData.address, formData.isProbation];
-    const data = contract.interface.encodeFunctionData('addEmployee', values);
+    try {
+      const contract = getRefContractForEmployeeManager(chainId, signer);
+      const values = [formData.nickname.toLowerCase(), formData.address, formData.isProbation];
+      const data = contract.interface.encodeFunctionData('addEmployee', values);
 
-    const gasLimit = await contract.estimateGas.addEmployee(...values);
-    const tx = {
-      to: contract.address,
-      data,
-      gasLimit: gasLimit * 2
-    };
+      const gasLimit = await contract.estimateGas.addEmployee(...values);
+      const tx = {
+        to: contract.address,
+        data,
+        gasLimit: gasLimit * 2
+      };
 
-    const transaction = await signer.sendTransaction(tx);
-    const receipt = await transaction.wait();
+      const transaction = await signer.sendTransaction(tx);
+      const receipt = await transaction.wait();
 
-    callback(transaction, receipt);
+      callback(transaction, receipt);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
