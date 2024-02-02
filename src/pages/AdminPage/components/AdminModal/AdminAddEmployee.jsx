@@ -13,7 +13,7 @@ export const AdminAddEmployee = ({ callback }) => {
     address: '',
     isProbation: true
   });
-  const { alert } = useNotifications();
+  const { alert, success } = useNotifications();
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -42,6 +42,10 @@ export const AdminAddEmployee = ({ callback }) => {
       const receipt = await transaction.wait();
 
       callback(transaction, receipt);
+
+      success(
+        `Сотрудник был создан под никтеймом - ${formData.nickname} и подключен к адресу ${formData.address}`
+      );
     } catch (e) {
       alert(e);
     }

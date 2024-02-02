@@ -4,6 +4,7 @@ import { selectCurrentUser } from '../../../../store/providerAndSigner/user-sele
 import { useWallet } from '../../../../hooks/useWallet';
 import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereumFunctions';
 import { BigNumber } from 'ethers';
+import { useNotifications } from '../../../../providers/Notifications';
 
 export const AdminAddTaskModal = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
@@ -17,6 +18,7 @@ export const AdminAddTaskModal = ({ callback }) => {
   });
   const [errors, setErrors] = useState([]);
   const [taskPeriods, setTaskPeriods] = useState(0);
+  const { alert, success } = useNotifications();
 
   const handleChangeField = (fieldKey, fieldValue, fieldIndex) => {
     if (['periods', 'prices'].includes(fieldKey)) {
@@ -52,32 +54,38 @@ export const AdminAddTaskModal = ({ callback }) => {
   };
 
   const handleSendTransaction = async () => {
-    const contract = getRefContractForTaskManager(chainId, signer);
-    const values = [
-      formData.title,
-      formData.description,
-      formData.nickname,
-      formData.periods.map((per) => {
-        const inputDate = new Date(per + 'T00:00:00Z');
-        inputDate.setUTCHours(12, 0, 0, 0);
-        const timestamp = inputDate.getTime();
-        return BigNumber.from(timestamp).div(1000);
-      }),
-      formData.prices.map((pr) => BigNumber.from(pr))
-    ];
-    const data = contract.interface.encodeFunctionData('addTask', values);
+    try {
+      const contract = getRefContractForTaskManager(chainId, signer);
+      const values = [
+        formData.title,
+        formData.description,
+        formData.nickname,
+        formData.periods.map((per) => {
+          const inputDate = new Date(per + 'T00:00:00Z');
+          inputDate.setUTCHours(12, 0, 0, 0);
+          const timestamp = inputDate.getTime();
+          return BigNumber.from(timestamp).div(1000);
+        }),
+        formData.prices.map((pr) => BigNumber.from(pr))
+      ];
+      const data = contract.interface.encodeFunctionData('addTask', values);
 
-    const gasLimit = await contract.estimateGas.addTask(...values);
-    const tx = {
-      to: contract.address,
-      data,
-      gasLimit: gasLimit * 2
-    };
+      const gasLimit = await contract.estimateGas.addTask(...values);
+      const tx = {
+        to: contract.address,
+        data,
+        gasLimit: gasLimit * 2
+      };
 
-    const transaction = await signer.sendTransaction(tx);
-    const receipt = await transaction.wait();
+      const transaction = await signer.sendTransaction(tx);
+      const receipt = await transaction.wait();
 
-    callback(transaction, receipt);
+      callback(transaction, receipt);
+
+      success(`Задача - ${formData.title} была создана для ${formData.nickname}`);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
