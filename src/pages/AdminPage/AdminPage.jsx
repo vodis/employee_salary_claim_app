@@ -9,11 +9,15 @@ const AdminPage = () => {
   const [transaction, setTransaction] = useState(null);
   const [receipt, setReceipt] = useState(null);
   const [read, setRead] = useState(null);
+  const [isForceActiveTab, setIsForceActiveTab] = useState(false);
 
   const handleCallback = (transaction, receipt, read) => {
     setTransaction(transaction);
     setReceipt(receipt);
     setRead(read);
+
+    setIsForceActiveTab(true);
+    setTimeout(() => setIsForceActiveTab(false), 0);
   };
 
   return (
@@ -38,7 +42,12 @@ const AdminPage = () => {
         <div className="container my-4">
           <div className="row">
             <div className="col-xs-auto col-lg-6">
-              <AdminInfoCard tx={transaction} receipt={receipt} read={read} />
+              <AdminInfoCard
+                tx={transaction}
+                receipt={receipt}
+                read={read}
+                isForceActiveTab={isForceActiveTab}
+              />
             </div>
             <div className="col-xs-auto col-lg-6">
               <DashboardInfoEmployee />

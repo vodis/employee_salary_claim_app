@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminInfoTable from './AdminInfoTable';
 import cn from 'classnames';
 
-const AdminInfoCard = ({ tx, receipt, read }) => {
+const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   const [formData, setFormData] = useState({
     isOnlyLogs: true
   });
@@ -11,6 +11,12 @@ const AdminInfoCard = ({ tx, receipt, read }) => {
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
+
+  useEffect(() => {
+    if (activeTab !== 1 && isForceActiveTab) {
+      setActiveTab(1);
+    }
+  }, [isForceActiveTab, activeTab]);
 
   return (
     <div className="card w-100 h-100">

@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Toast } from 'react-bootstrap';
 
-const DELAY = 30000; // 30sec
+// const DELAY = 30000; // 30sec
+const DELAY = 60000; // 1min
 
 export const NotificationsContext = createContext({
   error: '',
@@ -16,11 +17,25 @@ export const useNotifications = () => {
 
   const alert = (msg) => {
     let error;
-    if (msg.code === 'ACTION_REJECTED') {
-      error = 'Пользователь откланил транзакцию';
+    switch (msg.code) {
+      case 'ACTION_REJECTED':
+        error = 'Пользователь откланил транзакцию';
+        break;
+      case 'INVALID_ARGUMENT':
+        error = 'Введены не корректные данные';
+        break;
+      case '"BUFFER_OVERRUN"':
+        error = 'Переполнения буфера, проблема RPC';
+        break;
     }
-    if (msg.code === 'INVALID_ARGUMENT') {
-      error = 'Введены не корректные данные';
+    if (!msg.code && msg.message) {
+      error = msg.message;
+    }
+    if (!error && msg.reason) {
+      error = msg.reason;
+    }
+    if (!error) {
+      error = 'Неопределенная ошибка.';
     }
     context.setProvider({ success: '', error });
   };
@@ -61,6 +76,7 @@ const NotificationsProvider = ({ children }) => {
             animation={true}
             bg={provider.error ? 'danger' : 'success'}
             className="position-absolute top-0 end-0 mb-4 z-3"
+            style={{ width: 500 }}
           >
             <Toast.Body>
               <div className="d-flex justify-content-between gap-2">

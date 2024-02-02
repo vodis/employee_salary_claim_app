@@ -3,20 +3,27 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/providerAndSigner/user-selector';
 import { useWallet } from './useWallet';
 import { getRefContractForTaskManager } from '../utils/ethereum/ethereumFunctions';
+import { useNotifications } from '../providers/Notifications';
 
 export const useAddTaskEvent = (nickname, interval = 1000) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [tasks, setTasks] = useState([]);
+  const { alert } = useNotifications();
 
   useEffect(() => {
     if (!chainId) {
       return;
     }
     const iId = setInterval(async () => {
-      const contract = getRefContractForTaskManager(chainId, signer);
-      const filter = contract.filters.eLog();
-      const events = await contract.queryFilter(filter);
+      let events;
+      try {
+        const contract = getRefContractForTaskManager(chainId, signer);
+        const filter = contract.filters.eLog();
+        events = await contract.queryFilter(filter);
+      } catch (e) {
+        alert(e);
+      }
 
       if (events) {
         const eventInfo = events

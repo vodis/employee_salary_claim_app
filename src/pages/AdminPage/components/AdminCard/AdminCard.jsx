@@ -145,7 +145,7 @@ const AdminCard = ({ callback }) => {
           </div>
           <div className="d-flex align-items-center gap-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Создать никнейм для сотрудника
+              Добавить нового сотрудника
             </p>
             <button
               type="button"

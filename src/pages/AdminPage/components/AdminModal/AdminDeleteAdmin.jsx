@@ -3,6 +3,7 @@ import { getRefContractForChargeVesting } from '../../../../utils/ethereum/ether
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
+import { useNotifications } from '../../../../providers/Notifications';
 
 export const AdminDeleteAdmin = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
@@ -10,6 +11,7 @@ export const AdminDeleteAdmin = ({ callback }) => {
   const [formData, setFormData] = useState({
     address: ''
   });
+  const { alert, success } = useNotifications();
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -22,21 +24,27 @@ export const AdminDeleteAdmin = ({ callback }) => {
   };
 
   const handleSendTransaction = async () => {
-    const contract = getRefContractForChargeVesting(chainId, signer);
-    const values = [formData.address.toLowerCase()];
-    const data = contract.interface.encodeFunctionData('AdminDel', values);
+    try {
+      const contract = getRefContractForChargeVesting(chainId, signer);
+      const values = [formData.address.toLowerCase()];
+      const data = contract.interface.encodeFunctionData('AdminDel', values);
 
-    const gasLimit = await contract.estimateGas.AdminDel(...values);
-    const tx = {
-      to: contract.address,
-      data,
-      gasLimit: gasLimit * 2
-    };
+      const gasLimit = await contract.estimateGas.AdminDel(...values);
+      const tx = {
+        to: contract.address,
+        data,
+        gasLimit: gasLimit * 2
+      };
 
-    const transaction = await signer.sendTransaction(tx);
-    const receipt = await transaction.wait();
+      const transaction = await signer.sendTransaction(tx);
+      const receipt = await transaction.wait();
 
-    callback(transaction, receipt);
+      callback(transaction, receipt);
+
+      success(`Права администратора сняты с ${formData.address}`);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (

@@ -6,9 +6,9 @@ const EmployeeTask = ({ tasks, callback }) => {
 
   if (!tasks.length) {
     return loading ? (
-      <div class="text-center">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Загрузка...</span>
+      <div className="text-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Загрузка...</span>
         </div>
       </div>
     ) : (
