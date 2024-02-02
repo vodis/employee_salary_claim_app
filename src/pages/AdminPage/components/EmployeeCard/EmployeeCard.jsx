@@ -7,7 +7,7 @@ const EmployeeCard = ({ callback }) => {
   const { tasks: allTasks } = useAddTaskEvent();
   const { nickname } = useGetNicknameByWalletEvent();
   const [tasksByEmployee, setTasksByEmployee] = useState([]);
-
+  console.log(allTasks, nickname);
   useEffect(() => {
     if (!allTasks) {
       return;
@@ -15,6 +15,7 @@ const EmployeeCard = ({ callback }) => {
     const tasks = allTasks
       .filter((fd) => fd.nickname === nickname)
       .map((t) => ({
+        taskId: t.taskId.toNumber(),
         title: t.title,
         taskPeriods: t.periods.map((periodDate, i) => ({
           periodId: i,

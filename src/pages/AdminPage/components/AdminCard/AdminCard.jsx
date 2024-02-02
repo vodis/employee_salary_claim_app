@@ -173,7 +173,12 @@ const AdminCard = ({ callback }) => {
         <div className="border border-danger rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Stop task by Id</p>
-            <button type="button" className="btn btn-danger flex-grow-2 flex-shrink-1">
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#stop-task"
+              className="btn btn-danger flex-grow-2 flex-shrink-1"
+            >
               Stop task
             </button>
           </div>
