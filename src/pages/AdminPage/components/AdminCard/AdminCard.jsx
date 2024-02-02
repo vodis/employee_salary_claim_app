@@ -215,6 +215,30 @@ const AdminCard = ({ callback }) => {
               Выполнить
             </button>
           </div>
+          <div className="d-flex align-items-center gap-2">
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
+              Добавить нового администратора
+            </p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#add-admin"
+              className="btn btn-dark flex-grow-2 flex-shrink-1"
+            >
+              Выполнить
+            </button>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Удалить администратора</p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#delete-admin"
+              className="btn btn-dark flex-grow-2 flex-shrink-1"
+            >
+              Выполнить
+            </button>
+          </div>
         </div>
       </div>
     </div>
