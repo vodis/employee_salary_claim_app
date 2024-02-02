@@ -74,18 +74,18 @@ const AdminCard = ({ callback }) => {
   return (
     <div className="card w-100">
       <div className="card-body">
-        <h5 className="card-title text-center">Admin Section</h5>
+        <h5 className="card-title text-center">Секция администратора</h5>
 
         <div className="d-flex align-items-center gap-2 mb-2">
           <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-            Get employees list nicknames
+            Получить никнеймы сотрудников
           </p>
           <button
             type="button"
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetEmployees}
           >
-            Get Employees
+            Запросить
           </button>
         </div>
 
@@ -94,7 +94,7 @@ const AdminCard = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Fill in Task ID"
+              placeholder="Получить информацию по ID задачи"
               aria-label="taskId"
               aria-describedby="taskId"
               value={formData.taskId}
@@ -106,7 +106,7 @@ const AdminCard = ({ callback }) => {
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetTaskInfo}
           >
-            Get TaskInfo by Id
+            Запросить
           </button>
         </div>
 
@@ -115,7 +115,7 @@ const AdminCard = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Fill in Employee nickname"
+              placeholder="Получить все ID задачь по никнейму"
               aria-label="nickname"
               aria-describedby="nickname"
               value={formData.nickname}
@@ -127,64 +127,70 @@ const AdminCard = ({ callback }) => {
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetTaskIds}
           >
-            Get Task Ids by nickname
+            Запросить
           </button>
         </div>
 
         <div className="border border-success rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Create task</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Создать задачу</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#add-task"
               className="btn btn-success flex-grow-2 flex-shrink-1"
             >
-              Add task
+              Добавить
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add assignee with rate</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
+              Создать никнейм для сотрудника
+            </p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#add-employee"
               className="btn btn-success flex-grow-2 flex-shrink-1"
             >
-              Add assignee
+              Добавить
             </button>
           </div>
         </div>
 
         <div className="border border-warning rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Alpha Stage has been done</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
+              Подтвердить что задача прошла Алфа версию
+            </p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#approve-stage"
               className="btn btn-warning flex-grow-2 flex-shrink-1"
             >
-              Approve stage
+              Подтрердить
             </button>
           </div>
         </div>
 
         <div className="border border-danger rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Stop task by Id</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
+              Остановить задачу по ID для сотрудника
+            </p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#stop-task"
               className="btn btn-danger flex-grow-2 flex-shrink-1"
             >
-              Stop task
+              Остановить
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Withdraw USDT from contract
+              Перевести все токены с контракта на кошелек администратора
             </p>
             <button
               type="button"
@@ -192,21 +198,21 @@ const AdminCard = ({ callback }) => {
               data-bs-target="#withdraw"
               className="btn btn-danger flex-grow-2 flex-shrink-1"
             >
-              Withdraw
+              Выполнить
             </button>
           </div>
         </div>
 
         <div className="border border-dark rounded p-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Fire an employee</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Уволить сотрудника</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#fired-employee"
               className="btn btn-dark flex-grow-2 flex-shrink-1"
             >
-              Fired
+              Выполнить
             </button>
           </div>
         </div>

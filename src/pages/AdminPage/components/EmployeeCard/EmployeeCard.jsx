@@ -29,7 +29,7 @@ const EmployeeCard = ({ callback }) => {
   return (
     <div className="card">
       <div className="card-body">
-        <h5 className="card-title text-center">Employee Section</h5>
+        <h5 className="card-title text-center">Секция сотрудника</h5>
         <EmployeeTask tasks={tasksByEmployee} callback={callback} />
       </div>
     </div>

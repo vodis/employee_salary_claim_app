@@ -18,7 +18,7 @@ const EmployeeTask = ({ tasks, callback }) => {
 
   return tasks.map((t, i) => (
     <div key={i}>
-      <h5>{`${t.taskId} - ${t.title}`}</h5>
+      <h5>{`ID задачи: ${t.taskId} - Название: ${t.title}`}</h5>
       <div className="border-bottom border-secondary mb-1"></div>
       {t?.taskPeriods?.map((period, i) => {
         return <EmployeeTaskPeriond key={i} taskId={t.taskId} callback={callback} {...period} />;

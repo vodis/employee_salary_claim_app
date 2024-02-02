@@ -70,7 +70,7 @@ export const DashboardInfoEmployee = () => {
     <div className="card w-100 h-100">
       <div className="card-body">
         <div className="d-flex gap-3 align-items-center mb-4">
-          <h5 className="card-title mb-2 flex-shrink-0">Employee Info:</h5>
+          <h5 className="card-title mb-2 flex-shrink-0">Информация по сотрудникам:</h5>
           <select
             className="form-select flex-shrink-1"
             aria-label="users"
@@ -84,30 +84,30 @@ export const DashboardInfoEmployee = () => {
             ))}
           </select>
         </div>
-        <div className="d-flex flex-column mb-2">
+        <div className="d-flex flex-column mb-4">
           <div className="d-flex justify-content-between">
-            <span>Total open tasks:</span>
-            <span>null</span>
+            <span>Всего открыто задачь:</span>
+            <span>_</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Total blocked tasks:</span>
-            <span>null</span>
+            <span>Всего заблокировано задачь:</span>
+            <span>_</span>
           </div>
           <div className="d-flex justify-content-between mb-4">
-            <span>Total successful finished tasks:</span>
-            <span>null</span>
+            <span>Всего успешно выполнено задачь:</span>
+            <span>_</span>
           </div>
 
           <div className="d-flex justify-content-between">
-            <span>Total available to claim:</span>
+            <span>Всего доступно для получения:</span>
             <span>$</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Will be available to claim on the 5th:</span>
+            <span>Будет достуно 5го числа для получения:</span>
             <span>$</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Blocked in tasks:</span>
+            <span>Всего заблокировано в задачах:</span>
             <span>$</span>
           </div>
         </div>
