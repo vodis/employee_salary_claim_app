@@ -5,6 +5,7 @@ import { useWallet } from '../../../../hooks/useWallet';
 import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereumFunctions';
 import { BigNumber } from 'ethers';
 import { useNotifications } from '../../../../providers/Notifications';
+import cn from 'classnames';
 
 export const AdminAddTaskModal = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
@@ -165,10 +166,10 @@ export const AdminAddTaskModal = ({ callback }) => {
                 </div>
               )}
 
-              <div className="border border-info rounded p-3 mb-3">
+              <div className="border border-light rounded p-3 mb-3">
                 {[...Array(taskPeriods).keys()].map((id) => {
                   return (
-                    <div key={id}>
+                    <div key={id} className="border border-secondary rounded p-2 mb-2">
                       <div className="form-floating mb-3">
                         <label className="py-0" htmlFor="taskPeriodDate">
                           Дата завершения периода
@@ -195,7 +196,7 @@ export const AdminAddTaskModal = ({ callback }) => {
 
                       <div className="form-floating mb-3">
                         <label className="py-0" htmlFor="taskPeriodTime">
-                          Дата завершения периода
+                          Время завершения периода
                         </label>
                         <input
                           id="taskPeriodTime"
@@ -238,8 +239,11 @@ export const AdminAddTaskModal = ({ callback }) => {
                 <div className="d-flex justify-content-between">
                   <button
                     type="button"
-                    className="btn btn-warning"
+                    className={cn('btn btn-secondary', {
+                      'btn-warning': !!taskPeriods
+                    })}
                     onClick={() => !!taskPeriods && setTaskPeriods(taskPeriods - 1)}
+                    disabled={!taskPeriods}
                   >
                     Удалить дату
                   </button>
