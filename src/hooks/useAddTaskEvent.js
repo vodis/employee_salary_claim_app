@@ -30,6 +30,12 @@ export const useAddTaskEvent = (nickname, interval = 1000) => {
           .map((e) => e.args)
           .reduce((a, el, i, arr) => {
             if (el[1] === 'paid_one') {
+              const isAlreadyTakenButOutdated = a.findIndex(
+                (ex) => ex[1] === 'paid_one' && ex[2].toNumber() === el[2].toNumber()
+              );
+              if (isAlreadyTakenButOutdated !== -1) {
+                a[isAlreadyTakenButOutdated] = el;
+              }
               return a;
             }
             const findPaid = arr.findIndex((fPEl) => {
@@ -61,7 +67,7 @@ export const useAddTaskEvent = (nickname, interval = 1000) => {
       clearInterval(iId);
     };
   }, [chainId]);
-  console.log(tasks, '<');
+  // console.log('useAddTaskEvent logs: ', tasks);
   return {
     tasks
   };
