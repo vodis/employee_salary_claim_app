@@ -78,7 +78,7 @@ const AdminInfoTable = ({ d }) => {
     </td>
   );
 
-  const tableBodyData = d
+  const tableBodyData = d.length
     ? d.map((data, i) => (
         <tr key={`d-${i}`}>
           {h.map((name, j) =>
