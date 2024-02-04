@@ -4,12 +4,15 @@ import EmployeeInfoCard from './components/EmployeeInfoCard/EmployeeInfoCard';
 import AdminInfoCard from './components/AdminInfoCard/AdminInfoCard';
 import AdminModal from './components/AdminModal/AdminModal';
 import { DashboardInfoEmployee } from './components/AdminInfoCard/DashboardInfoEmployee';
+// import {useDebugEvent} from "../../hooks/useDebugEvent";
 
 const AdminPage = () => {
   const [transaction, setTransaction] = useState(null);
   const [receipt, setReceipt] = useState(null);
   const [read, setRead] = useState(null);
   const [isForceActiveTab, setIsForceActiveTab] = useState(false);
+
+  // useDebugEvent();
 
   const handleCallback = (transaction, receipt, read) => {
     setTransaction(transaction);

@@ -28,13 +28,29 @@ export const useAddTaskEvent = (nickname, interval = 1000) => {
       if (events) {
         const eventInfo = events
           .map((e) => e.args)
+          .reduce((a, el, i, arr) => {
+            if (el[1] === 'paid_one') {
+              return a;
+            }
+            const findPaid = arr.findIndex((fPEl) => {
+              return fPEl[1] === 'paid_one' && fPEl[2].toNumber() === el[2].toNumber();
+            });
+            if (findPaid !== -1) {
+              a.push(arr[findPaid]);
+              return a;
+            }
+            a.push(el);
+            return a;
+          }, [])
           .map((d) => ({
+            eventName: d[1],
             taskId: d[2],
             nickname: d[3],
             periods: d[4],
             prices: d[5],
-            createdAd: d[6],
-            title: d[7]
+            getIsAlreadyPaid: d[6],
+            createdAd: d[7],
+            title: d[8]
           }));
 
         setTasks(eventInfo);
@@ -45,7 +61,7 @@ export const useAddTaskEvent = (nickname, interval = 1000) => {
       clearInterval(iId);
     };
   }, [chainId]);
-
+  console.log(tasks, '<');
   return {
     tasks
   };

@@ -2,7 +2,7 @@ import EmployeeTaskPeriond from './EmployeeTaskPeriond';
 import { useFakeLoader } from '../../../../hooks/useFakeLoader';
 
 const EmployeeTask = ({ tasks, callback }) => {
-  const { loading } = useFakeLoader();
+  const { loading } = useFakeLoader(5000);
 
   if (!tasks.length) {
     return loading ? (

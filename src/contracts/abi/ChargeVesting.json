@@ -133,6 +133,25 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "taskId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "periodIndexes",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "debug",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "nn",
         "type": "uint256"
       },
