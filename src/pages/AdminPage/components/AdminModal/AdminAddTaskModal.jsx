@@ -14,14 +14,15 @@ export const AdminAddTaskModal = ({ callback }) => {
     description: '',
     nickname: '',
     periods: [],
-    prices: []
+    prices: [],
+    time: []
   });
   const [errors, setErrors] = useState([]);
   const [taskPeriods, setTaskPeriods] = useState(0);
   const { alert, success } = useNotifications();
 
   const handleChangeField = (fieldKey, fieldValue, fieldIndex) => {
-    if (['periods', 'prices'].includes(fieldKey)) {
+    if (['periods', 'prices', 'time'].includes(fieldKey)) {
       const updateFormValues = [...formData[fieldKey]];
       updateFormValues[fieldIndex] = fieldValue;
       setFormData({ ...formData, [fieldKey]: updateFormValues });
@@ -60,9 +61,10 @@ export const AdminAddTaskModal = ({ callback }) => {
         formData.title,
         formData.description,
         formData.nickname,
-        formData.periods.map((per) => {
-          const inputDate = new Date(per + 'T00:00:00Z');
-          inputDate.setUTCHours(12, 0, 0, 0);
+        formData.periods.map((per, i) => {
+          const [hours, minuts] = formData.time[i].split(':');
+          const inputDate = new Date(per + `T${hours}:${minuts}:00Z`);
+          inputDate.setUTCHours(hours, minuts, 0, 0);
           const timestamp = inputDate.getTime();
           return BigNumber.from(timestamp).div(1000);
         }),
@@ -101,7 +103,7 @@ export const AdminAddTaskModal = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addTaskLabel">
-                Create Task
+                Создать задачу для сотрудника
               </h1>
               <button
                 type="button"
@@ -115,7 +117,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Title"
+                  placeholder="Название задачи"
                   aria-label="Title"
                   aria-describedby="basic-addon1"
                   value={formData.title}
@@ -124,24 +126,25 @@ export const AdminAddTaskModal = ({ callback }) => {
               </div>
               {errors.includes('title') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Please add title.
+                  Название задачи должно быть заполнено
                 </div>
               )}
 
-              <div className="input-group mb-3">
-                <input
-                  type="text"
+              <div class="form-floating mb-3">
+                <textarea
                   className="form-control"
-                  placeholder="Description"
+                  placeholder="Описание задачи"
+                  id="floatingTextarea2"
+                  style={{ height: 100 }}
                   aria-label="Description"
-                  aria-describedby="basic-addon1"
                   value={formData.description}
                   onChange={(e) => handleChangeField('description', e.target.value)}
-                />
+                ></textarea>
+                <label htmlFor="floatingTextarea2">Описание задачи</label>
               </div>
               {errors.includes('description') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Please add description.
+                  Описание задачи должно быть заполнено
                 </div>
               )}
 
@@ -149,7 +152,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Nickname"
+                  placeholder="Никней"
                   aria-label="Nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -158,7 +161,7 @@ export const AdminAddTaskModal = ({ callback }) => {
               </div>
               {errors.includes('nickname') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Please add nickname.
+                  Никней должне быть указан
                 </div>
               )}
 
@@ -166,8 +169,12 @@ export const AdminAddTaskModal = ({ callback }) => {
                 {[...Array(taskPeriods).keys()].map((id) => {
                   return (
                     <div key={id}>
-                      <div className="input-group mb-3">
+                      <div className="form-floating mb-3">
+                        <label className="py-0" htmlFor="taskPeriodDate">
+                          Дата завершения периода
+                        </label>
                         <input
+                          id="taskPeriodDate"
                           type="date"
                           min={id ? formData.periods[id - 1] : ''}
                           max={id < formData.periods.length ? findNextPeriods(id) : ''}
@@ -182,13 +189,33 @@ export const AdminAddTaskModal = ({ callback }) => {
                       </div>
                       {errors.includes('periods') && (
                         <div className="alert alert-danger px-1 py-0" role="alert">
-                          Please add hours.
+                          Пожалуйста добавьте дату выполнения задачи
                         </div>
                       )}
+
+                      <div className="form-floating mb-3">
+                        <label className="py-0" htmlFor="taskPeriodTime">
+                          Дата завершения периода
+                        </label>
+                        <input
+                          id="taskPeriodTime"
+                          type="time"
+                          className="form-control"
+                          placeholder="Task should be completed in a date till 12-00 UTC"
+                          aria-label="Due time"
+                          aria-describedby="basic-addon1"
+                          value={formData.time[id]}
+                          onChange={(e) => handleChangeField('time', e.target.value, id)}
+                          onBlur={(e) => handleBlurDate('time', e.target.value, id)}
+                        />
+                      </div>
+                      {errors.includes('time') && (
+                        <div className="alert alert-danger px-1 py-0" role="alert">
+                          Пожалуйста добавьте время когда задача должны быть выполенна
+                        </div>
+                      )}
+
                       <div className="input-group mb-3">
-                        <span className="input-group-text" id="basic-addon1">
-                          USDT
-                        </span>
                         <input
                           type="number"
                           step="1"
@@ -196,11 +223,14 @@ export const AdminAddTaskModal = ({ callback }) => {
                           className="form-control"
                           placeholder="Task Price"
                           aria-label="Task Price"
-                          aria-describedby="basic-addon1"
+                          aria-describedby="basic-addon2"
                           value={formData.prices[id]}
                           onChange={(e) => handleChangeField('prices', e.target.value, id)}
                           onBlur={(e) => handleBlurDate('prices', e.target.value, id)}
                         />
+                        <span className="input-group-text" id="basic-addon2">
+                          USD
+                        </span>
                       </div>
                     </div>
                   );
@@ -208,23 +238,23 @@ export const AdminAddTaskModal = ({ callback }) => {
                 <div className="d-flex justify-content-between">
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn btn-warning"
                     onClick={() => !!taskPeriods && setTaskPeriods(taskPeriods - 1)}
                   >
-                    - period
+                    Удалить дату
                   </button>
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn btn-success"
                     onClick={() => setTaskPeriods(taskPeriods + 1)}
                   >
-                    + period
+                    Добавить дату
                   </button>
                 </div>
               </div>
               {errors.includes('prices') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Please add task price.
+                  Пожалуйста укажите стоимость задачи
                 </div>
               )}
             </div>

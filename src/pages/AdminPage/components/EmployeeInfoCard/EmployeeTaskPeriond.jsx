@@ -40,7 +40,7 @@ const EmployeeTaskPeriod = ({ taskId, periodId, periodDate, periodPrice, isClaim
   return (
     <div className="d-flex gap-3 justify-content-between align-items-center mb-1">
       <span>{periodId + 1}</span>
-      <span>{moment(new Date(periodDate * 1000)).format('YYYY-MM-DD')}</span>
+      <span>{moment(new Date(periodDate * 1000)).format('YYYY-MM-DD, h:mm:ss a')}</span>
       <span>${periodPrice.toNumber()}</span>
       <button
         disabled={isClaimed}
