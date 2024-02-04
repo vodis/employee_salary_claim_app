@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import AdminInfoTable from './AdminInfoTable';
 import cn from 'classnames';
+import { useEmployeesInfo } from '../../../../hooks/useEmployeeInfo';
+import moment from 'moment';
 
 const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   const [formData, setFormData] = useState({
     isOnlyLogs: true
   });
   const [activeTab, setActiveTab] = useState(0);
+  const [adminInfoTableData, setAdminInfoTableData] = useState([]);
+
+  const { employeesInfo } = useEmployeesInfo();
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -17,6 +22,22 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
       setActiveTab(1);
     }
   }, [isForceActiveTab, activeTab]);
+
+  useEffect(() => {
+    if (!employeesInfo.length) {
+      return;
+    }
+    const reassembleData = employeesInfo.reduce((a, el, i, arr) => {
+      a.push({
+        id: i,
+        nickname: el.nickname,
+        created: moment(el.createdAt).format('YYYY-MM-DD'),
+        address: el.address
+      });
+      return a;
+    }, []);
+    setAdminInfoTableData(reassembleData);
+  }, [employeesInfo]);
 
   return (
     <div className="card w-100 h-100">
@@ -45,7 +66,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
           </li>
         </ul>
 
-        {activeTab === 0 && <AdminInfoTable d={[]} />}
+        {activeTab === 0 && <AdminInfoTable d={adminInfoTableData} />}
         {activeTab === 1 && (
           <>
             <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
