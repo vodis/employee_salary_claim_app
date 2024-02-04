@@ -216,9 +216,7 @@ const AdminCard = ({ callback }) => {
             </button>
           </div>
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Добавить нового администратора
-            </p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Добавить администратора</p>
             <button
               type="button"
               data-bs-toggle="modal"

@@ -58,13 +58,13 @@ const AdminInfoTable = ({ d }) => {
           j === 0 ? (
             <th key={`d-${name.id}-${j}`} scope="row">
               <p className="placeholder-glow">
-                <span class="placeholder col-7"></span>
+                <span className="placeholder col-7"></span>
               </p>
             </th>
           ) : (
             <td key={`d-${name.id}-${j}`}>
               <p className="placeholder-glow">
-                <span class="placeholder col-7"></span>
+                <span className="placeholder col-7"></span>
               </p>
             </td>
           )
@@ -73,9 +73,11 @@ const AdminInfoTable = ({ d }) => {
     ));
 
   const tableBodyEmpty = (
-    <td colspan={h.length}>
-      Похоже что ни один сотрудник еще небыл добавлне. Добавьте нового сотрудника!
-    </td>
+    <tr>
+      <td colSpan={h.length} className="text-center">
+        Похоже что ни один сотрудник еще небыл добавлне. Добавьте нового сотрудника!
+      </td>
+    </tr>
   );
 
   const tableBodyData = d.length

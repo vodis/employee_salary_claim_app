@@ -131,7 +131,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                 </div>
               )}
 
-              <div class="form-floating mb-3">
+              <div className="form-floating mb-3">
                 <textarea
                   className="form-control"
                   placeholder="Описание задачи"
@@ -222,7 +222,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                           step="1"
                           id="prices"
                           className="form-control"
-                          placeholder="Task Price"
+                          placeholder="Цена"
                           aria-label="Task Price"
                           aria-describedby="basic-addon2"
                           value={formData.prices[id]}

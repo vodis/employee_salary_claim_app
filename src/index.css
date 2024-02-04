@@ -53,3 +53,8 @@ code {
     transform: translate(1px, -2px) rotate(-1deg);
   }
 }
+
+/* Remove outline on Chrome */
+.btn:focus {
+  box-shadow: none;
+}
