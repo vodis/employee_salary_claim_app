@@ -31,9 +31,10 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
       a.push({
         id: i,
         nickname: el.nickname,
-        created: moment(el.createdAt).format('YYYY-MM-DD'),
         address: el.address,
-        isFired: el.isFired
+        isFired: el.isFired,
+        createdAt: moment(new Date(el.createdAt * 1000)).format('YYYY-MM-DD'),
+        firedAt: el.firedAt ? moment(new Date(el.firedAt * 1000)).format('YYYY-MM-DD') : null
       });
       return a;
     }, []);

@@ -9,16 +9,12 @@ const AdminInfoTable = ({ d }) => {
       title: null
     },
     {
-      id: 'nickname',
-      title: 'Никнейм'
-    },
-    {
       id: 'address',
       title: 'Кошелек'
     },
     {
-      id: 'created',
-      title: 'Дата создания'
+      id: 'nickname',
+      title: 'Никнейм'
     },
     {
       id: 'taskInOpen',
@@ -47,6 +43,14 @@ const AdminInfoTable = ({ d }) => {
     {
       id: 'isFired',
       title: 'Сотрудник уволен'
+    },
+    {
+      id: 'createdAt',
+      title: 'Добавлен числа'
+    },
+    {
+      id: 'firedAt',
+      title: 'Уволен числа'
     }
   ];
 

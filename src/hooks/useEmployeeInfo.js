@@ -19,11 +19,29 @@ export const useEmployeesInfo = (interval) => {
     if (events) {
       const employeesInfo = events
         .map((e) => e.args)
+        .reduce((a, rEl) => {
+          if (rEl[1] === 'fired_employee') {
+            const isAlreadyTakenButOutdated = a.findIndex(
+              (ex) => ex[1] === 'add_employee' && ex[2].toLowerCase() === rEl[2].toLowerCase()
+            );
+            if (isAlreadyTakenButOutdated !== -1) {
+              a[isAlreadyTakenButOutdated] = {
+                ...rEl,
+                createdAt: a[isAlreadyTakenButOutdated][2],
+                firedAt: rEl[5]
+              };
+            }
+            return a;
+          }
+          a.push(rEl);
+          return a;
+        }, [])
         .map((mEl) => ({
           nickname: mEl[2],
           address: mEl[3],
           isFired: mEl[4],
-          createdAt: mEl[5]
+          createdAt: mEl[5],
+          firedAt: mEl.firedAt
         }));
       setEmployeesInfo(employeesInfo);
     }
