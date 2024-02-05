@@ -6,6 +6,8 @@ import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereu
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
+import { useAvailableToClaimOn5th } from '../../../../hooks/useAvailableToClaimOn5th';
+import { useGetNicknameByWalletEvent } from '../../../../hooks/useGetNicknameByWalletEvent';
 
 export const DashboardInfoEmployee = () => {
   const { signer } = useSelector(selectCurrentUser);
@@ -15,6 +17,9 @@ export const DashboardInfoEmployee = () => {
     users: []
   });
   const [chartData, setChartData] = useState([]);
+
+  const { nickname } = useGetNicknameByWalletEvent();
+  const { amount } = useAvailableToClaimOn5th(nickname);
 
   useEffect(() => {
     if (users && formData.users.length !== users.length) {
@@ -44,7 +49,8 @@ export const DashboardInfoEmployee = () => {
     if (events) {
       const data = events
         .map((e) => e.args)
-        // .filter((d) => d[3] === fieldValue)
+        .filter((d) => d[3] === fieldValue)
+        .filter((d) => d[1] === 'add_task')
         .map((d) => {
           return {
             dates: d[4].map((el) => moment(el.toNumber() * 1000).format('YYYY-MM-DD')),
@@ -87,28 +93,28 @@ export const DashboardInfoEmployee = () => {
         <div className="d-flex flex-column mb-4">
           <div className="d-flex justify-content-between">
             <span>Всего открыто задачь:</span>
-            <span>_</span>
+            <span>0</span>
           </div>
           <div className="d-flex justify-content-between">
             <span>Всего заблокировано задачь:</span>
-            <span>_</span>
+            <span>0</span>
           </div>
           <div className="d-flex justify-content-between mb-4">
             <span>Всего успешно выполнено задачь:</span>
-            <span>_</span>
+            <span>0</span>
           </div>
 
           <div className="d-flex justify-content-between">
             <span>Всего доступно для получения:</span>
-            <span>$</span>
+            <span>0</span>
           </div>
           <div className="d-flex justify-content-between">
             <span>Будет достуно 5го числа для получения:</span>
-            <span>$</span>
+            <span>{amount}</span>
           </div>
           <div className="d-flex justify-content-between">
             <span>Всего заблокировано в задачах:</span>
-            <span>$</span>
+            <span>0</span>
           </div>
         </div>
 

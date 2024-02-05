@@ -45,7 +45,7 @@ const AdminInfoTable = ({ d }) => {
       title: 'Email'
     },
     {
-      id: 'fired',
+      id: 'isFired',
       title: 'Сотрудник уволен'
     }
   ];
@@ -80,6 +80,15 @@ const AdminInfoTable = ({ d }) => {
     </tr>
   );
 
+  const tableTypeData = (colName, colValue) => {
+    switch (colName) {
+      case 'isFired':
+        return colValue ? 'Да' : 'Нет';
+      default:
+        return colValue;
+    }
+  };
+
   const tableBodyData = d.length
     ? d.map((data, i) => (
         <tr key={`d-${i}`}>
@@ -89,7 +98,7 @@ const AdminInfoTable = ({ d }) => {
                 {data[name.id] + 1}
               </th>
             ) : (
-              <td key={`d-${name.id}-${j}`}>{data[name.id]}</td>
+              <td key={`d-${name.id}-${j}`}>{tableTypeData(name.id, data[name.id])}</td>
             )
           )}
         </tr>

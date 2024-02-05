@@ -32,7 +32,8 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
         id: i,
         nickname: el.nickname,
         created: moment(el.createdAt).format('YYYY-MM-DD'),
-        address: el.address
+        address: el.address,
+        isFired: el.isFired
       });
       return a;
     }, []);
