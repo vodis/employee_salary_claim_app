@@ -1,7 +1,7 @@
 import { useFakeLoader } from '../../../../hooks/useFakeLoader';
 
-const AdminInfoTable = ({ d }) => {
-  const { loading } = useFakeLoader(5000); // 5 seconds
+const AdminInfoTable = ({ d, isLoading, withFakeLoader = false }) => {
+  const { loading: fakeLoading } = useFakeLoader(5000); // 5 seconds
 
   const h = [
     {
@@ -109,6 +109,8 @@ const AdminInfoTable = ({ d }) => {
       ))
     : tableBodyEmpty;
 
+  const isOneOfLoading = withFakeLoader ? fakeLoading : isLoading;
+
   return (
     <div className="overflow-scroll mb-2">
       <table className="table table-bordered">
@@ -121,7 +123,7 @@ const AdminInfoTable = ({ d }) => {
             ))}
           </tr>
         </thead>
-        <tbody>{loading ? tableBodyPlaceholder : tableBodyData}</tbody>
+        <tbody>{isOneOfLoading ? tableBodyPlaceholder : tableBodyData}</tbody>
       </table>
     </div>
   );

@@ -6,8 +6,8 @@ import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereu
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
-import { useAvailableToClaimOn5th } from '../../../../hooks/useAvailableToClaimOn5th';
 import { useGetNicknameByWalletEvent } from '../../../../hooks/useGetNicknameByWalletEvent';
+import { useGetEmployeeInfoCalc } from '../../../../hooks/useGetEmployeeInfoCalc';
 
 export const DashboardInfoEmployee = () => {
   const { signer } = useSelector(selectCurrentUser);
@@ -18,8 +18,8 @@ export const DashboardInfoEmployee = () => {
   });
   const [chartData, setChartData] = useState([]);
 
-  const { nickname } = useGetNicknameByWalletEvent();
-  const { amount } = useAvailableToClaimOn5th(nickname);
+  const { nickname } = useGetNicknameByWalletEvent(5000);
+  const { employeesInfoWithCalc } = useGetEmployeeInfoCalc([{ nickname }]);
 
   useEffect(() => {
     if (users && formData.users.length !== users.length) {
@@ -110,7 +110,7 @@ export const DashboardInfoEmployee = () => {
           </div>
           <div className="d-flex justify-content-between">
             <span>Будет достуно 5го числа для получения:</span>
-            <span>{amount}</span>
+            <span>{employeesInfoWithCalc.length ? employeesInfoWithCalc[0].toPay : 0}</span>
           </div>
           <div className="d-flex justify-content-between">
             <span>Всего заблокировано в задачах:</span>

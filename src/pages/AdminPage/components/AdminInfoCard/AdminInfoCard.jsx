@@ -12,7 +12,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [adminInfoTableData, setAdminInfoTableData] = useState([]);
   const { employeesInfo } = useGetEmployeeInfoEvent(5000);
-  const { employeesInfoWithCalc } = useGetEmployeeInfoCalc(adminInfoTableData);
+  const { employeesInfoWithCalc, isFetched } = useGetEmployeeInfoCalc(adminInfoTableData);
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -73,7 +73,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
           </li>
         </ul>
 
-        {activeTab === 0 && <AdminInfoTable d={employeesInfoWithCalc} />}
+        {activeTab === 0 && <AdminInfoTable d={employeesInfoWithCalc} isLoading={!isFetched} />}
         {activeTab === 1 && (
           <>
             <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
