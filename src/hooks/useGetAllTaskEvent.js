@@ -5,7 +5,7 @@ import { useWallet } from './useWallet';
 import { getRefContractForTaskManager } from '../utils/ethereum/ethereumFunctions';
 import { useNotifications } from '../providers/Notifications';
 
-export const useAddTaskEvent = (nickname, interval = 1000) => {
+export const useGetAllTaskEvent = (nickname, interval = 1000) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [tasks, setTasks] = useState([]);
@@ -67,7 +67,7 @@ export const useAddTaskEvent = (nickname, interval = 1000) => {
       clearInterval(iId);
     };
   }, [chainId]);
-  // console.log('useAddTaskEvent logs: ', tasks);
+
   return {
     tasks
   };

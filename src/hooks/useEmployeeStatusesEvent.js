@@ -10,7 +10,7 @@ import moment from 'moment';
 import { utils } from 'ethers';
 import { getTaskInfoLibResponse } from '../pages/AdminPage/components/AdminCard/libResponse';
 
-export const useEmployeeStatuses = () => {
+export const useEmployeeStatusesEvent = () => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [employeesInfo, setEmployeesInfo] = useState([]);

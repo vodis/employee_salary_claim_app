@@ -1,7 +1,7 @@
 import { useFakeLoader } from '../../../../hooks/useFakeLoader';
 
 const AdminInfoTable = ({ d }) => {
-  const { loading } = useFakeLoader(5000);
+  const { loading } = useFakeLoader(5000); // 5 seconds
 
   const h = [
     {

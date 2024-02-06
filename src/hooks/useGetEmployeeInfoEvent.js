@@ -5,13 +5,13 @@ import { selectCurrentUser } from '../store/providerAndSigner/user-selector';
 import { useWallet } from './useWallet';
 import { getRefContractForEmployeeManager } from '../utils/ethereum/ethereumFunctions';
 
-export const useEmployeesInfo = (interval) => {
+export const useGetEmployeeInfoEvent = (interval = 1000) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [employeesInfo, setEmployeesInfo] = useState([]);
   const { alert } = useNotifications();
 
-  const handleGetEvents = async (interval = 1000) => {
+  const handleGetEvents = async () => {
     const contract = getRefContractForEmployeeManager(chainId, signer);
     const filter = contract.filters.eLog();
     const events = await contract.queryFilter(filter);

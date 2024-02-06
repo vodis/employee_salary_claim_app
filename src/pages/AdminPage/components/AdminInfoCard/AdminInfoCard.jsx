@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import AdminInfoTable from './AdminInfoTable';
 import cn from 'classnames';
-import { useEmployeesInfo } from '../../../../hooks/useEmployeeInfo';
+import { useGetEmployeeInfoEvent } from '../../../../hooks/useGetEmployeeInfoEvent';
 import moment from 'moment';
+import { useGetEmployeeInfoCalc } from '../../../../hooks/useGetEmployeeInfoCalc';
 
 const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   const [formData, setFormData] = useState({
@@ -10,8 +11,8 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   });
   const [activeTab, setActiveTab] = useState(0);
   const [adminInfoTableData, setAdminInfoTableData] = useState([]);
-
-  const { employeesInfo } = useEmployeesInfo();
+  const { employeesInfo } = useGetEmployeeInfoEvent(5000);
+  const { employeesInfoWithCalc } = useGetEmployeeInfoCalc(adminInfoTableData);
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
@@ -39,6 +40,10 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
       return a;
     }, []);
     setAdminInfoTableData(reassembleData);
+
+    return () => {
+      setAdminInfoTableData([]);
+    };
   }, [employeesInfo]);
 
   return (
@@ -68,7 +73,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
           </li>
         </ul>
 
-        {activeTab === 0 && <AdminInfoTable d={adminInfoTableData} />}
+        {activeTab === 0 && <AdminInfoTable d={employeesInfoWithCalc} />}
         {activeTab === 1 && (
           <>
             <div className="d-flex gap-2 w-100 justify-content-end align-items-center">

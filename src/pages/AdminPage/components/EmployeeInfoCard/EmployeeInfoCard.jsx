@@ -1,10 +1,10 @@
 import EmployeeTask from './EmployeeTask';
-import { useAddTaskEvent } from '../../../../hooks/useAddTaskEvent';
+import { useGetAllTaskEvent } from '../../../../hooks/useGetAllTaskEvent';
 import { useEffect, useState } from 'react';
 import { useGetNicknameByWalletEvent } from '../../../../hooks/useGetNicknameByWalletEvent';
 
 const EmployeeInfoCard = ({ callback }) => {
-  const { tasks: allTasks } = useAddTaskEvent();
+  const { tasks: allTasks } = useGetAllTaskEvent();
   const { nickname } = useGetNicknameByWalletEvent();
   const [tasksByEmployee, setTasksByEmployee] = useState([]);
 
