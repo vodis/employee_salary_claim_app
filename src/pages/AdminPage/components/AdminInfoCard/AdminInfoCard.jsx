@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { useGetEmployeeInfoEvent } from '../../../../hooks/useGetEmployeeInfoEvent';
 import moment from 'moment';
 import { useGetEmployeeInfoCalc } from '../../../../hooks/useGetEmployeeInfoCalc';
+import AdminInfoContractCard from './AdminInfoContractCard';
 
 const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   const [formData, setFormData] = useState({
@@ -49,6 +50,8 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
   return (
     <div className="card w-100 h-100">
       <div className="card-body">
+        <AdminInfoContractCard />
+
         <ul className="nav nav-tabs mb-4">
           <li className="nav-item">
             <button
@@ -57,7 +60,6 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
                 active: activeTab === 0
               })}
             >
-              {' '}
               Таблица по сотрудникам
             </button>
           </li>

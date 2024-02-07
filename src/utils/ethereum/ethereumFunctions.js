@@ -9,6 +9,7 @@ const abiRefForChargeVesting = require('../../contracts/abi/ChargeVesting.json')
 const abiRefForTaskManager = require('../../contracts/abi/TaskManager.json');
 const abiRefForEmployeeManager = require('../../contracts/abi/EmployeeManager.json');
 const abiRefForEmployeeRateModel = require('../../contracts/abi/EmployeeRateModel.json');
+const abiRefForERC20 = require('../../contracts/abi/ERC20.json');
 
 export const getContract = (chainId, provider, isFetchTime) => {
   let address;
@@ -192,20 +193,17 @@ export const getRefContractForNickRead = async () => {
   return new ethers.Contract(address, abiRefForNick, provider);
 };
 
-export const getRefContractForChargeVesting = (chainId, signer) => {
+export const getRefContractForChargeVesting = (chainId, signer, cb) => {
+  let address;
   switch (chainId) {
     case 1337:
-      return new ethers.Contract(
-        '0xb6057e08a11da09a998985874FE2119e98dB3D5D',
-        abiRefForChargeVesting,
-        signer
-      );
+      address = '0xb6057e08a11da09a998985874FE2119e98dB3D5D';
+      cb(address);
+      return new ethers.Contract(address, abiRefForChargeVesting, signer);
     case 31337:
-      return new ethers.Contract(
-        '0xdCB0ab356Fefa3Ebc7759bb8E18A24134b73C546',
-        abiRefForChargeVesting,
-        signer
-      );
+      address = '0x61A3Ae286188e82d6E27567348F6a23f21939D9D';
+      cb(address);
+      return new ethers.Contract(address, abiRefForChargeVesting, signer);
     default:
       throw new Error('RPC-ERROR: at function getRefContractForChargeVesting');
   }
@@ -221,7 +219,7 @@ export const getRefContractForTaskManager = (chainId, signer) => {
       );
     case 31337:
       return new ethers.Contract(
-        '0xd128A6c87bd2F533c56a821e7840007F804AF79c',
+        '0x9a2d01D2E297ff9824Ca7fF00E141561443D05d9',
         abiRefForTaskManager,
         signer
       );
@@ -240,7 +238,7 @@ export const getRefContractForEmployeeManager = (chainId, signer) => {
       );
     case 31337:
       return new ethers.Contract(
-        '0x45810A12DA3dd028fE1978b1AABAD7239b0B8644',
+        '0x8AFE0ecCd5F4fF6d9cf02eECCEF6b2e4C4F44c75',
         abiRefForEmployeeManager,
         signer
       );
@@ -263,6 +261,22 @@ export const getRefContractForEmployeeRateModel = (chainId, signer) => {
         abiRefForEmployeeRateModel,
         signer
       );
+    default:
+      throw new Error('RPC-ERROR: at function getRefContractForEmployeeRateModel');
+  }
+};
+
+export const getRefContractForERC20 = (chainId, signer, cb) => {
+  let address;
+  switch (chainId) {
+    case 1337:
+      address = '0x15F2ea83eB97ede71d84Bd04fFF29444f6b7cd52';
+      cb && cb(address);
+      return new ethers.Contract(address, abiRefForERC20, signer);
+    case 31337:
+      address = '0x8Df2e40e2374e119372b76362F074365C743C86C';
+      cb && cb(address);
+      return new ethers.Contract(address, abiRefForERC20, signer);
     default:
       throw new Error('RPC-ERROR: at function getRefContractForEmployeeRateModel');
   }
