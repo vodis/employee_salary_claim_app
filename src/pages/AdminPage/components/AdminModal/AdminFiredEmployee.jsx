@@ -60,7 +60,7 @@ export const AdminFiredEmployee = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="firedEmployee">
-                {`Confirm the employee's submission!`}
+                Подтвердить увольнения сотрудника!
               </h1>
               <button
                 type="button"
@@ -74,7 +74,7 @@ export const AdminFiredEmployee = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Nickname"
+                  placeholder="Введить никнейм сотрудника"
                   aria-label="nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -85,14 +85,14 @@ export const AdminFiredEmployee = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Close
+                  Закрыть
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary w-100"
                   onClick={handleFiredEmployee}
                 >
-                  Yes, fired employee!
+                  Да, уволить!
                 </button>
               </div>
             </div>

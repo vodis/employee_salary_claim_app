@@ -52,7 +52,7 @@ export const AdminApproveStage = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="approveStage">
-                Confirm that the Alpha Stage task is completed!
+                Подтвердить что задача прошла Alpha Stage!
               </h1>
               <button
                 type="button"
@@ -66,7 +66,7 @@ export const AdminApproveStage = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Task Id"
+                  placeholder="Укажите TaskId задачи"
                   aria-label="taskId"
                   aria-describedby="basic-addon1"
                   value={formData.taskId}
@@ -77,14 +77,14 @@ export const AdminApproveStage = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Close
+                  Отменить
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary w-100"
                   onClick={handleApproveStage}
                 >
-                  Approve Stage
+                  Подтвердить стэйдж
                 </button>
               </div>
             </div>

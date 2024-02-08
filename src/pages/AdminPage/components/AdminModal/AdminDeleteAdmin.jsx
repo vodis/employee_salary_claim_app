@@ -102,7 +102,7 @@ export const AdminDeleteAdmin = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="deleteAdmin">
-                {`Confirm the employee's submission!`}
+                Подтвердить удаления администратора!
               </h1>
               <button
                 type="button"
@@ -116,7 +116,7 @@ export const AdminDeleteAdmin = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Адрес нового администратора"
+                  placeholder="Адрес администратора"
                   aria-label="nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -127,10 +127,10 @@ export const AdminDeleteAdmin = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Close
+                  Закрыть
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleDeleteAdmin}>
-                  Yes, add admin!
+                  Да, удалить админа!
                 </button>
               </div>
             </div>

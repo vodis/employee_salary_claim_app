@@ -8,14 +8,15 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
 import { utils } from 'ethers';
-import { getTaskInfoLibResponse } from './libResponse';
+import { getTaskInfoLibResponse, getEmployeeInfoLibResponse } from './libResponse';
 
 const AdminCard = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [formData, setFormData] = useState({
     taskId: '',
-    nickname: ''
+    nickname: '',
+    nicknameInfo: ''
   });
 
   const handleChangeField = (fieldKey, fieldValue) => {
@@ -95,9 +96,28 @@ const AdminCard = ({ callback }) => {
     const result = await signer.call(tx);
     const decodedResult = utils.defaultAbiCoder
       .decode(['uint256[]'], result)
-      ?.map((el) => el.toString());
+      ?.map((el) => el.toString())
+      .map((el) => ({
+        taskId: el
+      }));
 
     callback(null, null, decodedResult);
+  };
+
+  const handleGetEmployeeInfo = async () => {
+    const contract = getRefContractForEmployeeManager(chainId, signer);
+    const data = contract.interface.encodeFunctionData('getEmployeeInfo', [formData.nicknameInfo]);
+    const gasLimit = await contract.estimateGas.getEmployeeInfo(formData.nicknameInfo);
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit.mul(2)
+    };
+
+    const result = await signer.call(tx);
+    const read = getEmployeeInfoLibResponse(result);
+
+    callback(null, null, read);
   };
 
   return (
@@ -136,17 +156,17 @@ const AdminCard = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Получить информацию по ID задачи"
-              aria-label="taskId"
-              aria-describedby="taskId"
-              value={formData.taskId}
-              onChange={(e) => handleChangeField('taskId', e.target.value)}
+              placeholder="Получить информацию о сотруднике по никнейму"
+              aria-label="nicknameInfo"
+              aria-describedby="nicknameInfo"
+              value={formData.nicknameInfo}
+              onChange={(e) => handleChangeField('nicknameInfo', e.target.value)}
             />
           </div>
           <button
             type="button"
             className="btn btn-light flex-grow-2 flex-shrink-1"
-            onClick={handleGetTaskInfo}
+            onClick={handleGetEmployeeInfo}
           >
             Запросить
           </button>
@@ -173,19 +193,29 @@ const AdminCard = ({ callback }) => {
           </button>
         </div>
 
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <div className="flex-grow-1 flex-shrink-1">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Получить информацию по ID задачи"
+              aria-label="taskId"
+              aria-describedby="taskId"
+              value={formData.taskId}
+              onChange={(e) => handleChangeField('taskId', e.target.value)}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn-light flex-grow-2 flex-shrink-1"
+            onClick={handleGetTaskInfo}
+          >
+            Запросить
+          </button>
+        </div>
+
         <div className="border border-success rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Создать задачу</p>
-            <button
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#add-task"
-              className="btn btn-success flex-grow-2 flex-shrink-1"
-            >
-              Добавить
-            </button>
-          </div>
-          <div className="d-flex align-items-center gap-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
               Добавить нового сотрудника
             </p>
@@ -193,6 +223,17 @@ const AdminCard = ({ callback }) => {
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#add-employee"
+              className="btn btn-success flex-grow-2 flex-shrink-1"
+            >
+              Добавить
+            </button>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Создать задачу</p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#add-task"
               className="btn btn-success flex-grow-2 flex-shrink-1"
             >
               Добавить
@@ -254,6 +295,17 @@ const AdminCard = ({ callback }) => {
               className="btn btn-danger flex-grow-2 flex-shrink-1"
             >
               Выполнить
+            </button>
+          </div>
+          <div className="d-flex align-items-center gap-2">
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Изменить адрес сотрудника</p>
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#update-employee-addr"
+              className="btn btn-danger flex-grow-2 flex-shrink-1"
+            >
+              Изменить
             </button>
           </div>
         </div>

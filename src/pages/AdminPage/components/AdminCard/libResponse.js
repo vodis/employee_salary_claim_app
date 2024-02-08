@@ -64,3 +64,53 @@ export const getTaskInfoLibResponse = (result) => {
     isAlreadyPaidPeriod
   };
 };
+
+export const getEmployeeInfoLibResponse = (result) => {
+  const decodedResult = utils.defaultAbiCoder.decode(
+    [
+      // Tuple for the "Meta" struct
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256'
+          },
+          {
+            internalType: 'bool',
+            name: 'isProbationPassed',
+            type: 'bool'
+          },
+          {
+            internalType: 'bool',
+            name: 'isFired',
+            type: 'bool'
+          },
+          {
+            internalType: 'bool',
+            name: 'isBlocked',
+            type: 'bool'
+          },
+          {
+            internalType: 'address',
+            name: 'addr',
+            type: 'address'
+          }
+        ],
+        internalType: 'struct EmployeeManager.Statuses',
+        name: '',
+        type: 'tuple'
+      }
+    ],
+    result
+  );
+  const [statuses] = decodedResult;
+
+  return {
+    employeeId: statuses[0].toNumber(),
+    isProbationPassed: statuses[1],
+    isFired: statuses[2],
+    isBlocked: statuses[3],
+    address: statuses[4]
+  };
+};

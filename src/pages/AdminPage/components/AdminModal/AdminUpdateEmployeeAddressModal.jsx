@@ -2,28 +2,28 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
-import { getRefContractForChargeVesting } from '../../../../utils/ethereum/ethereumFunctions';
+import { getRefContractForEmployeeManager } from '../../../../utils/ethereum/ethereumFunctions';
 import { useNotifications } from '../../../../providers/Notifications';
 
-export const AdminWithdrawModal = ({ callback }) => {
+export const AdminUpdateEmployeeAddressModal = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const { alert, success } = useNotifications();
   const [formData, setFormData] = useState({
-    tokenAddress: '',
-    amount: ''
+    addr: '',
+    nickname: ''
   });
 
   const handleChangeField = (fieldKey, fieldValue) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
-  const handleWithdraw = async () => {
+  const handleUpdateAddress = async () => {
     try {
-      const contract = getRefContractForChargeVesting(chainId, signer);
-      const values = [formData.tokenAddress, formData.amount];
-      const data = contract.interface.encodeFunctionData('AdminGetToken', values);
-      const gasLimit = await contract.estimateGas.AdminGetToken(...values);
+      const contract = getRefContractForEmployeeManager(chainId, signer);
+      const values = [formData.nickname, formData.addr];
+      const data = contract.interface.encodeFunctionData('updateEmployeeAddr', values);
+      const gasLimit = await contract.estimateGas.updateEmployeeAddr(...values);
       const tx = {
         to: contract.address,
         data,
@@ -33,9 +33,7 @@ export const AdminWithdrawModal = ({ callback }) => {
       const transaction = await signer.sendTransaction(tx);
       callback(transaction);
 
-      success(
-        `Токены были успешно переведены в количестве ${formData.amount} на адрес администратора`
-      );
+      success(`Адрес для сотрудника ${formData.nickname} был изменен на ${formData.addr}`);
     } catch (e) {
       alert(e);
     }
@@ -44,7 +42,7 @@ export const AdminWithdrawModal = ({ callback }) => {
   return (
     <div
       className="modal fade"
-      id="withdraw"
+      id="update-employee-addr"
       tabIndex="-1"
       aria-labelledby="withdrawLabel"
       aria-hidden="true"
@@ -53,7 +51,7 @@ export const AdminWithdrawModal = ({ callback }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="withdrawLabel">
-              Вывести токены с контракта
+              Изменить адрес для выплат сотруднику
             </h1>
             <button
               type="button"
@@ -62,42 +60,34 @@ export const AdminWithdrawModal = ({ callback }) => {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">
-            <h5>
-              Вы уверены? Все указанное количество будет переведено на счет владельца. Все
-              сотрудники могут быть ограниченны в выплатах.
-            </h5>
+          <div className="input-group mb-3 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Введите никнейм сотрудника"
+              aria-label="nickname"
+              aria-describedby="basic-addon2"
+              value={formData.nickname}
+              onChange={(e) => handleChangeField('nickname', e.target.value)}
+            />
           </div>
           <div className="input-group mb-3 p-2">
             <input
               type="text"
               className="form-control"
-              placeholder="Введите адрес токена, который выводить - USDT ..."
-              aria-label="tokenAddress"
+              placeholder="Введите новый адресс"
+              aria-label="address"
               aria-describedby="basic-addon1"
-              value={formData.tokenAddress}
-              onChange={(e) => handleChangeField('tokenAddress', e.target.value)}
-            />
-          </div>
-          <div className="input-group mb-3 p-2">
-            <input
-              type="number"
-              step="1"
-              id="prices"
-              className="form-control"
-              placeholder="Количество для вывода или 0 для вывода всего"
-              aria-label="amount"
-              aria-describedby="basic-addon2"
-              value={formData.amount}
-              onChange={(e) => handleChangeField('amount', e.target.value)}
+              value={formData.addr}
+              onChange={(e) => handleChangeField('addr', e.target.value)}
             />
           </div>
           <div className="d-flex gap-3 w-100 p-2 mb-2">
             <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
               Закрыть
             </button>
-            <button type="button" className="btn btn-primary w-100" onClick={handleWithdraw}>
-              Вывести
+            <button type="button" className="btn btn-primary w-100" onClick={handleUpdateAddress}>
+              Изменить
             </button>
           </div>
         </div>

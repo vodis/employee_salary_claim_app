@@ -265,10 +265,10 @@ export const AdminAddTaskModal = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Close
+                  Закрыть
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleCreateTask}>
-                  Add Task
+                  Создать задачу
                 </button>
               </div>
             </div>

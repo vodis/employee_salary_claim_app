@@ -197,7 +197,7 @@ export const getRefContractForChargeVesting = (chainId, signer, cb) => {
   let address;
   switch (chainId) {
     case 1337:
-      address = '0x6fFa22292b86D678fF6621eEdC9B15e68dC44DcD';
+      address = '0x716473Fb4E7cD49c7d1eC7ec6d7490A03d9dA332';
       cb && cb(address);
       return new ethers.Contract(address, abiRefForChargeVesting, signer);
     case 31337:
@@ -213,7 +213,7 @@ export const getRefContractForTaskManager = (chainId, signer) => {
   switch (chainId) {
     case 1337:
       return new ethers.Contract(
-        '0xE401FBb0d6828e9f25481efDc9dd18Da9E500983',
+        '0x6B9C4119796C80Ced5a3884027985Fd31830555b',
         abiRefForTaskManager,
         signer
       );
@@ -232,7 +232,7 @@ export const getRefContractForEmployeeManager = (chainId, signer) => {
   switch (chainId) {
     case 1337:
       return new ethers.Contract(
-        '0xBe6Eb4ACB499f992ba2DaC7CAD59d56DA9e0D823',
+        '0x725314746e727f586E9FCA65AeD5dBe45aA71B99',
         abiRefForEmployeeManager,
         signer
       );
@@ -270,7 +270,7 @@ export const getRefContractForERC20 = (chainId, signer, cb) => {
   let address;
   switch (chainId) {
     case 1337:
-      address = '0x91A1EeE63f300B8f41AE6AF67eDEa2e2ed8c3f79';
+      address = '0x820638ecd57B55e51CE6EaD7D137962E7A201dD9';
       cb && cb(address);
       return new ethers.Contract(address, abiRefForERC20, signer);
     case 31337:

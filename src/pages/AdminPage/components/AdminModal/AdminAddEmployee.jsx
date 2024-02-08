@@ -42,7 +42,6 @@ export const AdminAddEmployee = ({ callback }) => {
       const receipt = await transaction.wait();
 
       callback(transaction, receipt);
-
       success(
         `Сотрудник был создан под никтеймом - ${formData.nickname} и подключен к адресу ${formData.address}`
       );
@@ -64,7 +63,7 @@ export const AdminAddEmployee = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addEmployee">
-                Add Employee
+                Добавить сотрудника
               </h1>
               <button
                 type="button"
@@ -78,7 +77,7 @@ export const AdminAddEmployee = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Nickname"
+                  placeholder="Укажите уникальный никнейм"
                   aria-label="Nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -89,7 +88,7 @@ export const AdminAddEmployee = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Address"
+                  placeholder="Укажите адресс кошелька сотрудника"
                   aria-label="Address"
                   aria-describedby="basic-addon1"
                   value={formData.address}
@@ -107,7 +106,7 @@ export const AdminAddEmployee = ({ callback }) => {
                     aria-label="isProbation"
                   />
                   <label className="form-check-label w-auto h-auto m-0" htmlFor="isProbation">
-                    Is probation period
+                    Сотрудника на испытательном сроке
                   </label>
                 </div>
               </div>
@@ -115,10 +114,10 @@ export const AdminAddEmployee = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Close
+                  Закрыть
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleAddEmployee}>
-                  Add Employee
+                  Добавить сотрудника
                 </button>
               </div>
             </div>

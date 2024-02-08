@@ -69,7 +69,7 @@ export const AdminOpenTask = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Таск ID"
+                  placeholder="Укажите ТаскId задачи"
                   aria-label="Таск ID"
                   aria-describedby="basic-addon1"
                   value={formData.taskId}

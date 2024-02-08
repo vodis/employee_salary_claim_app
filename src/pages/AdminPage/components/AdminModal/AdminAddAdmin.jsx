@@ -102,7 +102,7 @@ export const AdminAddAdmin = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addAdmin">
-                {`Confirm the employee's submission!`}
+                Подтвердить добавление администратора!
               </h1>
               <button
                 type="button"
@@ -127,10 +127,10 @@ export const AdminAddAdmin = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Close
+                  Закрыть
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleAddAdmin}>
-                  Yes, add admin!
+                  Да, добавить админа!
                 </button>
               </div>
             </div>
