@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
 
-export const AdminStopTask = ({ callback }) => {
+export const AdminOpenTask = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [formData, setFormData] = useState({
@@ -15,7 +15,7 @@ export const AdminStopTask = ({ callback }) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
-  const handleStopTask = (e) => {
+  const handleOpenTask = (e) => {
     e.preventDefault();
     // TODO Add field validations before send tx
     handleSendTransaction();
@@ -24,9 +24,9 @@ export const AdminStopTask = ({ callback }) => {
   const handleSendTransaction = async () => {
     const contract = getRefContractForTaskManager(chainId, signer);
     const values = [formData.taskId];
-    const data = contract.interface.encodeFunctionData('stopTaskById', values);
+    const data = contract.interface.encodeFunctionData('openTaskById', values);
 
-    const gasLimit = await contract.estimateGas.stopTaskById(...values);
+    const gasLimit = await contract.estimateGas.openTaskById(...values);
     const tx = {
       to: contract.address,
       data,
@@ -38,24 +38,24 @@ export const AdminStopTask = ({ callback }) => {
 
     callback(transaction, receipt, {
       taskId: formData.taskId,
-      isTaskStopped: true
+      isTaskStopped: false
     });
   };
 
   return (
     <div
       className="modal fade"
-      id="stop-task"
+      id="open-close-task"
       tabIndex="-1"
-      aria-labelledby="stopTask"
+      aria-labelledby="openTask"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <form className="row g-3">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="stopTask">
-                Остановить задачу
+              <h1 className="modal-title fs-5" id="openTask">
+                Запустить остановленную задачу
               </h1>
               <button
                 type="button"
@@ -82,8 +82,8 @@ export const AdminStopTask = ({ callback }) => {
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
                   Закрыть
                 </button>
-                <button type="submit" className="btn btn-primary w-100" onClick={handleStopTask}>
-                  Да, остановить!
+                <button type="submit" className="btn btn-primary w-100" onClick={handleOpenTask}>
+                  Да, открыть!
                 </button>
               </div>
             </div>

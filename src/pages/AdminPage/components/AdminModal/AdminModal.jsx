@@ -6,6 +6,7 @@ import { AdminFiredEmployee } from './AdminFiredEmployee';
 import { AdminStopTask } from './AdminStopTask';
 import { AdminAddAdmin } from './AdminAddAdmin';
 import { AdminDeleteAdmin } from './AdminDeleteAdmin';
+import { AdminOpenTask } from './AdminOpenTask';
 
 const AdminModal = (props) => {
   return (
@@ -18,6 +19,7 @@ const AdminModal = (props) => {
       <AdminStopTask {...props} />
       <AdminAddAdmin {...props} />
       <AdminDeleteAdmin {...props} />
+      <AdminOpenTask {...props} />
     </>
   );
 };
