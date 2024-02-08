@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {
   getRefContractForTaskManager,
-  getRefContractForEmployeeManager
+  getRefContractForEmployeeManager,
+  getRefContractForChargeVesting
 } from '../../../../utils/ethereum/ethereumFunctions';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
@@ -21,6 +22,28 @@ const AdminCard = ({ callback }) => {
     setFormData({ ...formData, [fieldKey]: fieldValue });
   };
 
+  const handleGetAdmins = async () => {
+    const contract = getRefContractForChargeVesting(chainId, signer);
+    const data = contract.interface.encodeFunctionData('AdminList', []);
+    const gasLimit = await contract.estimateGas.AdminList();
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit.mul(2)
+    };
+
+    const result = await signer.call(tx);
+    const decodedResult = utils.defaultAbiCoder.decode(['address[]'], result)[0];
+
+    callback(
+      null,
+      null,
+      decodedResult.map((el) => ({
+        adminAddress: el
+      }))
+    );
+  };
+
   const handleGetEmployees = async () => {
     const contract = getRefContractForEmployeeManager(chainId, signer);
     const data = contract.interface.encodeFunctionData('getAllEmployeeNicknames', []);
@@ -32,9 +55,15 @@ const AdminCard = ({ callback }) => {
     };
 
     const result = await signer.call(tx);
-    const decodedResult = utils.defaultAbiCoder.decode(['string[]'], result);
+    const decodedResult = utils.defaultAbiCoder.decode(['string[]'], result)[0];
 
-    callback(null, null, decodedResult);
+    callback(
+      null,
+      null,
+      decodedResult.map((el) => ({
+        nickname: el
+      }))
+    );
   };
 
   const handleGetTaskInfo = async () => {
@@ -75,6 +104,19 @@ const AdminCard = ({ callback }) => {
     <div className="card w-100">
       <div className="card-body">
         <h5 className="card-title text-center">Секция администратора</h5>
+
+        <div className="d-flex align-items-center gap-2 mb-2">
+          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
+            Получить адреса администраторов
+          </p>
+          <button
+            type="button"
+            className="btn btn-light flex-grow-2 flex-shrink-1"
+            onClick={handleGetAdmins}
+          >
+            Запросить
+          </button>
+        </div>
 
         <div className="d-flex align-items-center gap-2 mb-2">
           <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">

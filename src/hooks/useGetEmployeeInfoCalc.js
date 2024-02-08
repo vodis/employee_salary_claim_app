@@ -10,7 +10,7 @@ export const useGetEmployeeInfoCalc = (employeesInfo) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [employeesInfoWithCalc, setEmployeesInfoWithCalc] = useState([]);
-  const [isFetched, setIsFetched] = useState(null);
+  const [isFetched, setIsFetched] = useState(false);
 
   const getTaskIds = async (nickname) => {
     const contract = getRefContractForTaskManager(chainId, signer);
@@ -74,7 +74,6 @@ export const useGetEmployeeInfoCalc = (employeesInfo) => {
   };
 
   const handleGetCalc = async () => {
-    setIsFetched(false);
     const getAllCalc = await Promise.all(
       employeesInfo.map(async (eI) => {
         const taskIds = await getTaskIds(eI.nickname);

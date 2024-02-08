@@ -75,12 +75,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
           </li>
         </ul>
 
-        {activeTab === 0 && (
-          <AdminInfoTable
-            d={employeesInfoWithCalc}
-            isLoading={isFetched === null ? false : isFetched}
-          />
-        )}
+        {activeTab === 0 && <AdminInfoTable d={employeesInfoWithCalc} isLoading={!isFetched} />}
         {activeTab === 1 && (
           <>
             <div className="d-flex gap-2 w-100 justify-content-end align-items-center">
