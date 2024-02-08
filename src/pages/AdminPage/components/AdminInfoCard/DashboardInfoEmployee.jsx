@@ -6,42 +6,35 @@ import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereu
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
-import { useGetNicknameByWalletEvent } from '../../../../hooks/useGetNicknameByWalletEvent';
 import { useGetEmployeeInfoCalc } from '../../../../hooks/useGetEmployeeInfoCalc';
 
 export const DashboardInfoEmployee = () => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const { users } = useUsers();
-  const [formData, setFormData] = useState({
-    users: []
+  const [selectEmployee, setSelectEmployee] = useState(null);
+  const [employeeData, setEmployeeData] = useState({
+    nickname: '',
+    chartData: [],
+    isTaskOpened: 0,
+    isTaskStopped: 0,
+    isTaskDone: 0,
+    totalToClaim: 0,
+    totalToClaim5th: 0,
+    totalLocked: 0
   });
-  const [chartData, setChartData] = useState([]);
 
-  const { nickname } = useGetNicknameByWalletEvent(5000);
-  const { employeesInfoWithCalc } = useGetEmployeeInfoCalc([{ nickname }]);
+  const { employeesInfoWithCalc } = useGetEmployeeInfoCalc(
+    selectEmployee ? [{ nickname: selectEmployee }] : []
+  );
 
   useEffect(() => {
-    if (users && formData.users.length !== users.length) {
-      setFormData({
-        ...formData,
-        users: users.map(({ nickname }) => ({ nickname, selected: false }))
-      });
+    if (selectEmployee && chainId) {
+      handleChangeDiagram();
     }
-  }, [users, formData]);
+  }, [selectEmployee, chainId]);
 
-  const handleChangeDiagram = async (fieldKey, fieldValue) => {
-    setFormData({
-      ...formData,
-      [fieldKey]: formData.users.map((el) =>
-        !el.nickname !== fieldValue ? { ...el, selected: false } : { ...el, selected: true }
-      )
-    });
-
-    if (!chainId || !fieldValue) {
-      setChartData([]);
-      return;
-    }
+  const handleChangeDiagram = async () => {
     const contract = getRefContractForTaskManager(chainId, signer);
     const filter = contract.filters.eLog();
     const events = await contract.queryFilter(filter);
@@ -49,7 +42,7 @@ export const DashboardInfoEmployee = () => {
     if (events) {
       const data = events
         .map((e) => e.args)
-        .filter((d) => d[3] === fieldValue)
+        .filter((d) => d[3] === selectEmployee)
         .filter((d) => d[1] === 'add_task')
         .map((d) => {
           return {
@@ -68,7 +61,10 @@ export const DashboardInfoEmployee = () => {
         acc.push(...innerCombine);
         return acc;
       }, []);
-      setChartData(combine);
+      setEmployeeData({
+        ...employeeData,
+        chartData: combine
+      });
     }
   };
 
@@ -80,10 +76,10 @@ export const DashboardInfoEmployee = () => {
           <select
             className="form-select flex-shrink-1"
             aria-label="users"
-            onChange={(e) => handleChangeDiagram('users', e.target.value)}
+            onChange={(e) => setSelectEmployee(e.target.value)}
           >
             <option value={''}>Select nickname</option>
-            {formData.users.map(({ nickname }) => (
+            {users.map(({ nickname }) => (
               <option key={nickname} value={nickname}>
                 {nickname}
               </option>
@@ -93,15 +89,27 @@ export const DashboardInfoEmployee = () => {
         <div className="d-flex flex-column mb-4">
           <div className="d-flex justify-content-between">
             <span>Всего открыто задачь:</span>
-            <span>0</span>
+            <span>
+              {employeesInfoWithCalc.length && selectEmployee
+                ? employeesInfoWithCalc[0].taskInOpen
+                : 0}
+            </span>
           </div>
           <div className="d-flex justify-content-between">
             <span>Всего заблокировано задачь:</span>
-            <span>0</span>
+            <span>
+              {employeesInfoWithCalc.length && selectEmployee
+                ? employeesInfoWithCalc[0].isBlocked
+                : 0}
+            </span>
           </div>
           <div className="d-flex justify-content-between mb-4">
             <span>Всего успешно выполнено задачь:</span>
-            <span>0</span>
+            <span>
+              {employeesInfoWithCalc.length && selectEmployee
+                ? employeesInfoWithCalc[0].isApproved
+                : 0}
+            </span>
           </div>
 
           <div className="d-flex justify-content-between">
@@ -110,7 +118,9 @@ export const DashboardInfoEmployee = () => {
           </div>
           <div className="d-flex justify-content-between">
             <span>Будет достуно 5го числа для получения:</span>
-            <span>{employeesInfoWithCalc.length ? employeesInfoWithCalc[0].toPay : 0}</span>
+            <span>
+              {employeesInfoWithCalc.length && selectEmployee ? employeesInfoWithCalc[0].toPay : 0}
+            </span>
           </div>
           <div className="d-flex justify-content-between">
             <span>Всего заблокировано в задачах:</span>
@@ -118,7 +128,7 @@ export const DashboardInfoEmployee = () => {
           </div>
         </div>
 
-        <DiagramEmployee d={chartData} />
+        <DiagramEmployee d={employeeData.chartData} />
       </div>
     </div>
   );

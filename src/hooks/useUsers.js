@@ -4,7 +4,7 @@ import { selectCurrentUser } from '../store/providerAndSigner/user-selector';
 import { useWallet } from './useWallet';
 import { getRefContractForEmployeeManager } from '../utils/ethereum/ethereumFunctions';
 
-export const useUsers = () => {
+export const useUsers = (interval = 20000) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
   const [users, setUsers] = useState([]);
@@ -22,6 +22,7 @@ export const useUsers = () => {
         setUsers(
           events
             .map((e) => e.args)
+            .filter((arg) => arg[1] === 'add_employee')
             .map((d) => ({
               nickname: d[2],
               address: d[3],
@@ -29,7 +30,7 @@ export const useUsers = () => {
             }))
         );
       }
-    }, 1000);
+    }, interval);
     return () => {
       clearInterval(iId);
     };
