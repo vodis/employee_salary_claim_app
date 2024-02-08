@@ -198,11 +198,11 @@ export const getRefContractForChargeVesting = (chainId, signer, cb) => {
   switch (chainId) {
     case 1337:
       address = '0xb6057e08a11da09a998985874FE2119e98dB3D5D';
-      cb(address);
+      cb && cb(address);
       return new ethers.Contract(address, abiRefForChargeVesting, signer);
     case 31337:
       address = '0x61A3Ae286188e82d6E27567348F6a23f21939D9D';
-      cb(address);
+      cb && cb(address);
       return new ethers.Contract(address, abiRefForChargeVesting, signer);
     default:
       throw new Error('RPC-ERROR: at function getRefContractForChargeVesting');

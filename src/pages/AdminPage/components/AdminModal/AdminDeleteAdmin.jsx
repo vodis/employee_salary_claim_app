@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import { getRefContractForChargeVesting } from '../../../../utils/ethereum/ethereumFunctions';
+import {
+  getRefContractForChargeVesting,
+  getRefContractForEmployeeManager,
+  getRefContractForTaskManager
+} from '../../../../utils/ethereum/ethereumFunctions';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
@@ -23,24 +27,62 @@ export const AdminDeleteAdmin = ({ callback }) => {
     handleSendTransaction();
   };
 
+  const deleteAdminAtChargeVesting = async (values) => {
+    const contract = getRefContractForChargeVesting(chainId, signer);
+    const data = contract.interface.encodeFunctionData('AdminDel', values);
+
+    const gasLimit = await contract.estimateGas.AdminDel(...values);
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit * 2
+    };
+
+    const transaction = await signer.sendTransaction(tx);
+    await transaction.wait();
+  };
+
+  const deleteAdminAtTaskManager = async (values) => {
+    const contract = getRefContractForEmployeeManager(chainId, signer);
+    const data = contract.interface.encodeFunctionData('AdminDel', values);
+
+    const gasLimit = await contract.estimateGas.AdminDel(...values);
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit * 2
+    };
+
+    const transaction = await signer.sendTransaction(tx);
+    await transaction.wait();
+  };
+
+  const deleteAdminAtEmployeeManager = async (values) => {
+    const contract = getRefContractForTaskManager(chainId, signer);
+    const data = contract.interface.encodeFunctionData('AdminDel', values);
+
+    const gasLimit = await contract.estimateGas.AdminDel(...values);
+    const tx = {
+      to: contract.address,
+      data,
+      gasLimit: gasLimit * 2
+    };
+
+    const transaction = await signer.sendTransaction(tx);
+    await transaction.wait();
+  };
+
   const handleSendTransaction = async () => {
     try {
-      const contract = getRefContractForChargeVesting(chainId, signer);
+      if (!chainId) {
+        throw new Error('Сhain id is not available');
+      }
       const values = [formData.address.toLowerCase()];
-      const data = contract.interface.encodeFunctionData('AdminDel', values);
+      await deleteAdminAtChargeVesting(values);
+      await deleteAdminAtTaskManager(values);
+      await deleteAdminAtEmployeeManager(values);
 
-      const gasLimit = await contract.estimateGas.AdminDel(...values);
-      const tx = {
-        to: contract.address,
-        data,
-        gasLimit: gasLimit * 2
-      };
-
-      const transaction = await signer.sendTransaction(tx);
-      const receipt = await transaction.wait();
-
-      callback(transaction, receipt);
-
+      callback(null, null, { deleteAdminAddress: formData.address, success: true });
       success(`Права администратора сняты с ${formData.address}`);
     } catch (e) {
       alert(e);
