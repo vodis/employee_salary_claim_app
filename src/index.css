@@ -10,6 +10,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+td {
+  white-space: nowrap;
+}
+
 .shake {
   /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 1s;

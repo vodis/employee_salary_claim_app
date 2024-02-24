@@ -10,31 +10,31 @@ const AdminInfoTable = ({ d, isLoading, withFakeLoader = false }) => {
     },
     {
       id: 'address',
-      title: 'Кошелек'
+      title: 'Wallet'
     },
     {
       id: 'nickname',
-      title: 'Никнейм'
+      title: 'Nickname'
     },
     {
       id: 'taskInOpen',
-      title: 'Открытые задачи'
+      title: 'Open tasks'
     },
     {
       id: 'isApproved',
-      title: 'Подтрержденные задачи'
+      title: 'Approved tasks'
     },
     {
       id: 'isBlocked',
-      title: 'Заблокированные задачи'
+      title: 'Blocked tasks'
     },
     {
       id: 'toPay',
-      title: 'К оплате на 5 число'
+      title: 'Payment on the 5th.'
     },
     {
       id: 'tg',
-      title: 'Телеграмм'
+      title: 'Telegram'
     },
     {
       id: 'email',
@@ -42,15 +42,15 @@ const AdminInfoTable = ({ d, isLoading, withFakeLoader = false }) => {
     },
     {
       id: 'isFired',
-      title: 'Сотрудник уволен'
+      title: 'Employee fired'
     },
     {
       id: 'createdAt',
-      title: 'Добавлен числа'
+      title: 'Created At'
     },
     {
       id: 'firedAt',
-      title: 'Уволен числа'
+      title: 'Fired At'
     }
   ];
 
@@ -79,7 +79,7 @@ const AdminInfoTable = ({ d, isLoading, withFakeLoader = false }) => {
   const tableBodyEmpty = (
     <tr>
       <td colSpan={h.length} className="text-center">
-        Похоже что ни один сотрудник еще небыл добавлне. Добавьте нового сотрудника!
+        It appears that no employees have been added yet. Add a new employee!
       </td>
     </tr>
   );
@@ -87,7 +87,7 @@ const AdminInfoTable = ({ d, isLoading, withFakeLoader = false }) => {
   const tableTypeData = (colName, colValue) => {
     switch (colName) {
       case 'isFired':
-        return colValue ? 'Да' : 'Нет';
+        return colValue ? 'Yes' : 'No';
       default:
         return colValue;
     }

@@ -85,7 +85,7 @@ export const AdminAddTaskModal = ({ callback }) => {
 
       callback(transaction, receipt);
 
-      success(`Задача - ${formData.title} была создана для ${formData.nickname}`);
+      success(`Task - ${formData.title} was created for ${formData.nickname}`);
     } catch (e) {
       alert(e);
     }
@@ -104,7 +104,7 @@ export const AdminAddTaskModal = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addTaskLabel">
-                Создать задачу для сотрудника
+                Create a task for an employee
               </h1>
               <button
                 type="button"
@@ -118,7 +118,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Название задачи"
+                  placeholder="Task name"
                   aria-label="Title"
                   aria-describedby="basic-addon1"
                   value={formData.title}
@@ -127,25 +127,25 @@ export const AdminAddTaskModal = ({ callback }) => {
               </div>
               {errors.includes('title') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Название задачи должно быть заполнено
+                  The task name must be filled in
                 </div>
               )}
 
               <div className="form-floating mb-3">
                 <textarea
                   className="form-control"
-                  placeholder="Описание задачи"
+                  placeholder="Description of the task"
                   id="floatingTextarea2"
                   style={{ height: 100 }}
                   aria-label="Description"
                   value={formData.description}
                   onChange={(e) => handleChangeField('description', e.target.value)}
                 ></textarea>
-                <label htmlFor="floatingTextarea2">Описание задачи</label>
+                <label htmlFor="floatingTextarea2">Description of the task</label>
               </div>
               {errors.includes('description') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Описание задачи должно быть заполнено
+                  The task description must be completed
                 </div>
               )}
 
@@ -153,7 +153,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Никней"
+                  placeholder="Nickname"
                   aria-label="Nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -162,7 +162,7 @@ export const AdminAddTaskModal = ({ callback }) => {
               </div>
               {errors.includes('nickname') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Никней должне быть указан
+                  Nickname must be specified
                 </div>
               )}
 
@@ -172,7 +172,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                     <div key={id} className="border border-secondary rounded p-2 mb-2">
                       <div className="form-floating mb-3">
                         <label className="py-0" htmlFor="taskPeriodDate">
-                          Дата завершения периода
+                          Period end date
                         </label>
                         <input
                           id="taskPeriodDate"
@@ -190,13 +190,13 @@ export const AdminAddTaskModal = ({ callback }) => {
                       </div>
                       {errors.includes('periods') && (
                         <div className="alert alert-danger px-1 py-0" role="alert">
-                          Пожалуйста добавьте дату выполнения задачи
+                          Please add a task due date
                         </div>
                       )}
 
                       <div className="form-floating mb-3">
                         <label className="py-0" htmlFor="taskPeriodTime">
-                          Время завершения периода
+                          Period end time
                         </label>
                         <input
                           id="taskPeriodTime"
@@ -212,7 +212,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                       </div>
                       {errors.includes('time') && (
                         <div className="alert alert-danger px-1 py-0" role="alert">
-                          Пожалуйста добавьте время когда задача должны быть выполенна
+                          Please add the time when the task must be completed
                         </div>
                       )}
 
@@ -222,7 +222,7 @@ export const AdminAddTaskModal = ({ callback }) => {
                           step="1"
                           id="prices"
                           className="form-control"
-                          placeholder="Цена"
+                          placeholder="Price"
                           aria-label="Task Price"
                           aria-describedby="basic-addon2"
                           value={formData.prices[id]}
@@ -245,30 +245,30 @@ export const AdminAddTaskModal = ({ callback }) => {
                     onClick={() => !!taskPeriods && setTaskPeriods(taskPeriods - 1)}
                     disabled={!taskPeriods}
                   >
-                    Удалить дату
+                    Delete date
                   </button>
                   <button
                     type="button"
                     className="btn btn-success"
                     onClick={() => setTaskPeriods(taskPeriods + 1)}
                   >
-                    Добавить дату
+                    Add date
                   </button>
                 </div>
               </div>
               {errors.includes('prices') && (
                 <div className="alert alert-danger px-1 py-0" role="alert">
-                  Пожалуйста укажите стоимость задачи
+                  Please indicate the cost of the task
                 </div>
               )}
             </div>
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Закрыть
+                  Close
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleCreateTask}>
-                  Создать задачу
+                  Create a task
                 </button>
               </div>
             </div>

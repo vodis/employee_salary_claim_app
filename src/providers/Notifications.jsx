@@ -19,13 +19,13 @@ export const useNotifications = () => {
     let error;
     switch (msg.code) {
       case 'ACTION_REJECTED':
-        error = 'Пользователь откланил транзакцию';
+        error = 'The user declined the transaction';
         break;
       case 'INVALID_ARGUMENT':
-        error = 'Введены не корректные данные';
+        error = 'Incorrect data entered';
         break;
       case '"BUFFER_OVERRUN"':
-        error = 'Переполнения буфера, проблема RPC';
+        error = 'Buffer overflow, RPC problem';
         break;
     }
     if (!msg.code && msg.message) {
@@ -35,7 +35,7 @@ export const useNotifications = () => {
       error = msg.reason;
     }
     if (!error) {
-      error = 'Неопределенная ошибка.';
+      error = 'Unknown error';
     }
     context.setProvider({ success: '', error });
   };

@@ -34,7 +34,7 @@ export const AdminWithdrawModal = ({ callback }) => {
       callback(transaction);
 
       success(
-        `Токены были успешно переведены в количестве ${formData.amount} на адрес администратора`
+        `Tokens were successfully converted into a number ${formData.amount} to the administrator address`
       );
     } catch (e) {
       alert(e);
@@ -53,7 +53,7 @@ export const AdminWithdrawModal = ({ callback }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="withdrawLabel">
-              Вывести токены с контракта
+              Withdraw tokens from the contract
             </h1>
             <button
               type="button"
@@ -64,15 +64,15 @@ export const AdminWithdrawModal = ({ callback }) => {
           </div>
           <div className="modal-body">
             <h5>
-              Вы уверены? Все указанное количество будет переведено на счет владельца. Все
-              сотрудники могут быть ограниченны в выплатах.
+              Are you sure? The entire specified amount will be transferred to the owner account.
+              All employees may be subject to limited benefits.
             </h5>
           </div>
           <div className="input-group mb-3 p-2">
             <input
               type="text"
               className="form-control"
-              placeholder="Введите адрес токена, который выводить - USDT ..."
+              placeholder="Enter the address of the token to be withdrawn - USDT ..."
               aria-label="tokenAddress"
               aria-describedby="basic-addon1"
               value={formData.tokenAddress}
@@ -85,7 +85,7 @@ export const AdminWithdrawModal = ({ callback }) => {
               step="1"
               id="prices"
               className="form-control"
-              placeholder="Количество для вывода или 0 для вывода всего"
+              placeholder="Number to output or 0 to output everything"
               aria-label="amount"
               aria-describedby="basic-addon2"
               value={formData.amount}
@@ -94,10 +94,10 @@ export const AdminWithdrawModal = ({ callback }) => {
           </div>
           <div className="d-flex gap-3 w-100 p-2 mb-2">
             <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-              Закрыть
+              Close
             </button>
             <button type="button" className="btn btn-primary w-100" onClick={handleWithdraw}>
-              Вывести
+              Withdraw
             </button>
           </div>
         </div>

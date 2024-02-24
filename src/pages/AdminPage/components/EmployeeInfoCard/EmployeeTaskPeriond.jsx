@@ -30,7 +30,7 @@ const EmployeeTaskPeriod = ({ taskId, periodId, periodDate, periodPrice, isClaim
       callback(transaction, receipt);
 
       success(
-        `Клейм по периоду ${periodId} по задаче ${taskId} выполнен. Проверте свой адрес кошелька. Если вы не видите отображение токинов, попробуйте добавить адрес USDT в ваш волет`
+        `The stamp for period ${periodId} for task ${taskId} is completed. Check your wallet address. If you don't see the tokens displayed, try adding the USDT address to your volet`
       );
     } catch (e) {
       alert(e);

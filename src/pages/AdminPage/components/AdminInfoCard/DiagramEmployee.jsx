@@ -17,7 +17,7 @@ const DiagramEmployee = ({ d }) => {
   return (
     <div>
       <div className="d-flex align-items-center mb-2 gap-1">
-        <h6 className="card-title m-0 p-0">Диаграма по датам выплат:</h6>
+        <h6 className="card-title m-0 p-0">Chart by payment:</h6>
         <div className="d-flex gap-2">
           <div className="input-group">
             <input

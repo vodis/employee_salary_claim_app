@@ -83,7 +83,7 @@ export const AdminAddAdmin = ({ callback }) => {
       await addAdminAtEmployeeManager(values);
 
       callback(null, null, { newAdminAddress: formData.address, success: true });
-      success(`Адресу ${formData.address} добавлены права администратора`);
+      success(`Administrator rights have been added to address ${formData.address}`);
     } catch (e) {
       alert(e);
     }

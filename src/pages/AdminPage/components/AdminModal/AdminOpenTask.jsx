@@ -44,7 +44,7 @@ export const AdminOpenTask = ({ callback }) => {
         isTaskStopped: false
       });
 
-      success(`Таска ${formData.taskId} была открыта`);
+      success(`Task ${formData.taskId} has been opened`);
     } catch (e) {
       alert(e);
     }
@@ -63,7 +63,7 @@ export const AdminOpenTask = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="openTask">
-                Запустить остановленную задачу
+                Start a stopped task
               </h1>
               <button
                 type="button"
@@ -77,7 +77,7 @@ export const AdminOpenTask = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Укажите ТаскId задачи"
+                  placeholder="Specify the TaskId of the task"
                   aria-label="Таск ID"
                   aria-describedby="basic-addon1"
                   value={formData.taskId}
@@ -88,10 +88,10 @@ export const AdminOpenTask = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Закрыть
+                  Close
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleOpenTask}>
-                  Да, открыть!
+                  Yes, open it!
                 </button>
               </div>
             </div>

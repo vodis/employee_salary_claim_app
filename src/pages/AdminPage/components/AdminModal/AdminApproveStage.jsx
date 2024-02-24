@@ -41,7 +41,7 @@ export const AdminApproveStage = ({ callback }) => {
 
       callback(transaction, receipt);
 
-      success(`Таска ${formData.taskId} была пройдена Стэйдж Период`);
+      success(`Task ${formData.taskId} Stage Period has been completed`);
     } catch (e) {
       alert(e);
     }
@@ -60,7 +60,7 @@ export const AdminApproveStage = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="approveStage">
-                Подтвердить что задача прошла Alpha Stage!
+                Confirm that task has passed the Alpha Stage!
               </h1>
               <button
                 type="button"
@@ -74,7 +74,7 @@ export const AdminApproveStage = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Укажите TaskId задачи"
+                  placeholder="Specify the TaskId of the task"
                   aria-label="taskId"
                   aria-describedby="basic-addon1"
                   value={formData.taskId}
@@ -85,14 +85,14 @@ export const AdminApproveStage = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Отменить
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary w-100"
                   onClick={handleApproveStage}
                 >
-                  Подтвердить стэйдж
+                  Confirm stage
                 </button>
               </div>
             </div>

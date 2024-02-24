@@ -72,7 +72,7 @@ export const DashboardInfoEmployee = () => {
     <div className="card w-100 h-100">
       <div className="card-body">
         <div className="d-flex gap-3 align-items-center mb-4">
-          <h5 className="card-title mb-2 flex-shrink-0">Информация по сотрудникам:</h5>
+          <h5 className="card-title mb-2 flex-shrink-0">Employee information:</h5>
           <select
             className="form-select flex-shrink-1"
             aria-label="users"
@@ -88,7 +88,7 @@ export const DashboardInfoEmployee = () => {
         </div>
         <div className="d-flex flex-column mb-4">
           <div className="d-flex justify-content-between">
-            <span>Всего открыто задачь:</span>
+            <span>Total open tasks:</span>
             <span>
               {employeesInfoWithCalc.length && selectEmployee
                 ? employeesInfoWithCalc[0].taskInOpen
@@ -96,7 +96,7 @@ export const DashboardInfoEmployee = () => {
             </span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Всего заблокировано задачь:</span>
+            <span>Total blocked tasks:</span>
             <span>
               {employeesInfoWithCalc.length && selectEmployee
                 ? employeesInfoWithCalc[0].isBlocked
@@ -104,7 +104,7 @@ export const DashboardInfoEmployee = () => {
             </span>
           </div>
           <div className="d-flex justify-content-between mb-4">
-            <span>Всего успешно выполнено задачь:</span>
+            <span>Total tasks successfully completed:</span>
             <span>
               {employeesInfoWithCalc.length && selectEmployee
                 ? employeesInfoWithCalc[0].isApproved
@@ -113,17 +113,17 @@ export const DashboardInfoEmployee = () => {
           </div>
 
           <div className="d-flex justify-content-between">
-            <span>Всего доступно для получения:</span>
+            <span>Total available for receipt:</span>
             <span>0</span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Будет достуно 5го числа для получения:</span>
+            <span>Will be available on the 5th to receive:</span>
             <span>
               {employeesInfoWithCalc.length && selectEmployee ? employeesInfoWithCalc[0].toPay : 0}
             </span>
           </div>
           <div className="d-flex justify-content-between">
-            <span>Всего заблокировано в задачах:</span>
+            <span>Total blocked in tasks:</span>
             <span>0</span>
           </div>
         </div>

@@ -43,7 +43,7 @@ export const AdminAddEmployee = ({ callback }) => {
 
       callback(transaction, receipt);
       success(
-        `Сотрудник был создан под никтеймом - ${formData.nickname} и подключен к адресу ${formData.address}`
+        `The employee was created under the nickname - ${formData.nickname} and connected to the address ${formData.address}`
       );
     } catch (e) {
       alert(e);
@@ -63,7 +63,7 @@ export const AdminAddEmployee = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addEmployee">
-                Добавить сотрудника
+                Add an employee
               </h1>
               <button
                 type="button"
@@ -77,7 +77,7 @@ export const AdminAddEmployee = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Укажите уникальный никнейм"
+                  placeholder="Please provide a unique nickname"
                   aria-label="Nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -88,7 +88,7 @@ export const AdminAddEmployee = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Укажите адресс кошелька сотрудника"
+                  placeholder="Enter the employee wallet address"
                   aria-label="Address"
                   aria-describedby="basic-addon1"
                   value={formData.address}
@@ -106,7 +106,7 @@ export const AdminAddEmployee = ({ callback }) => {
                     aria-label="isProbation"
                   />
                   <label className="form-check-label w-auto h-auto m-0" htmlFor="isProbation">
-                    Сотрудника на испытательном сроке
+                    Employee on probation
                   </label>
                 </div>
               </div>
@@ -114,10 +114,10 @@ export const AdminAddEmployee = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Закрыть
+                  Close
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleAddEmployee}>
-                  Добавить сотрудника
+                  Add an employee
                 </button>
               </div>
             </div>

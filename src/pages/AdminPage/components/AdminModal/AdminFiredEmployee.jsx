@@ -41,7 +41,7 @@ export const AdminFiredEmployee = ({ callback }) => {
 
       callback(transaction, receipt);
 
-      success(`Пользователь ${formData.nickname} был уволен`);
+      success(`User ${formData.nickname} was fired`);
     } catch (e) {
       alert(e);
     }
@@ -60,7 +60,7 @@ export const AdminFiredEmployee = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="firedEmployee">
-                Подтвердить увольнения сотрудника!
+                Confirm the employee dismissal!
               </h1>
               <button
                 type="button"
@@ -74,7 +74,7 @@ export const AdminFiredEmployee = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Введить никнейм сотрудника"
+                  placeholder="Enter employee nickname"
                   aria-label="nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -85,14 +85,14 @@ export const AdminFiredEmployee = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Закрыть
+                  Close
                 </button>
                 <button
                   type="submit"
                   className="btn btn-primary w-100"
                   onClick={handleFiredEmployee}
                 >
-                  Да, уволить!
+                  Yes, fire him!
                 </button>
               </div>
             </div>

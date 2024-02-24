@@ -123,31 +123,27 @@ const AdminCard = ({ callback }) => {
   return (
     <div className="card w-100">
       <div className="card-body">
-        <h5 className="card-title text-center">Секция администратора</h5>
+        <h5 className="card-title text-center">Admin section</h5>
 
         <div className="d-flex align-items-center gap-2 mb-2">
-          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-            Получить адреса администраторов
-          </p>
+          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Get administrator addresses</p>
           <button
             type="button"
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetAdmins}
           >
-            Запросить
+            Request
           </button>
         </div>
 
         <div className="d-flex align-items-center gap-2 mb-2">
-          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-            Получить никнеймы сотрудников
-          </p>
+          <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Get employee nicknames</p>
           <button
             type="button"
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetEmployees}
           >
-            Запросить
+            Request
           </button>
         </div>
 
@@ -156,7 +152,7 @@ const AdminCard = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Получить информацию о сотруднике по никнейму"
+              placeholder="Get information about an employee by nickname"
               aria-label="nicknameInfo"
               aria-describedby="nicknameInfo"
               value={formData.nicknameInfo}
@@ -168,7 +164,7 @@ const AdminCard = ({ callback }) => {
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetEmployeeInfo}
           >
-            Запросить
+            Request
           </button>
         </div>
 
@@ -177,7 +173,7 @@ const AdminCard = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Получить все ID задачь по никнейму"
+              placeholder="Get all task IDs by nickname"
               aria-label="nickname"
               aria-describedby="nickname"
               value={formData.nickname}
@@ -189,7 +185,7 @@ const AdminCard = ({ callback }) => {
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetTaskIds}
           >
-            Запросить
+            Request
           </button>
         </div>
 
@@ -198,7 +194,7 @@ const AdminCard = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Получить информацию по ID задачи"
+              placeholder="Get information by task ID"
               aria-label="taskId"
               aria-describedby="taskId"
               value={formData.taskId}
@@ -210,33 +206,31 @@ const AdminCard = ({ callback }) => {
             className="btn btn-light flex-grow-2 flex-shrink-1"
             onClick={handleGetTaskInfo}
           >
-            Запросить
+            Request
           </button>
         </div>
 
         <div className="border border-success rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Добавить нового сотрудника
-            </p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add a new employee</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#add-employee"
               className="btn btn-success flex-grow-2 flex-shrink-1"
             >
-              Добавить
+              Add
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Создать задачу</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Create a task</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#add-task"
               className="btn btn-success flex-grow-2 flex-shrink-1"
             >
-              Добавить
+              Add
             </button>
           </div>
         </div>
@@ -244,7 +238,7 @@ const AdminCard = ({ callback }) => {
         <div className="border border-warning rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Подтвердить что задача прошла Алфа версию
+              Confirm that the task has passed the Alpha version
             </p>
             <button
               type="button"
@@ -252,20 +246,18 @@ const AdminCard = ({ callback }) => {
               data-bs-target="#approve-stage"
               className="btn btn-warning flex-grow-2 flex-shrink-1"
             >
-              Подтрердить
+              Confirm
             </button>
           </div>
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Открыть остановленную задачу
-            </p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Open a stopped task</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#open-close-task"
               className="btn btn-warning flex-grow-2 flex-shrink-1"
             >
-              Открыть
+              Open
             </button>
           </div>
         </div>
@@ -273,7 +265,7 @@ const AdminCard = ({ callback }) => {
         <div className="border border-danger rounded p-3 mb-3">
           <div className="d-flex align-items-center gap-2 mb-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Остановить задачу по ID для сотрудника
+              Stop a task by ID for an employee
             </p>
             <button
               type="button"
@@ -281,12 +273,12 @@ const AdminCard = ({ callback }) => {
               data-bs-target="#stop-task"
               className="btn btn-danger flex-grow-2 flex-shrink-1"
             >
-              Остановить
+              Stop
             </button>
           </div>
-          <div className="d-flex align-items-center gap-2">
+          <div className="d-flex align-items-center gap-2 mb-2">
             <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">
-              Перевести все токены с контракта на кошелек администратора
+              Transfer all tokens from the contract to the admin wallet
             </p>
             <button
               type="button"
@@ -294,54 +286,54 @@ const AdminCard = ({ callback }) => {
               data-bs-target="#withdraw"
               className="btn btn-danger flex-grow-2 flex-shrink-1"
             >
-              Выполнить
+              Execute
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Изменить адрес сотрудника</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Change employee address</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#update-employee-addr"
               className="btn btn-danger flex-grow-2 flex-shrink-1"
             >
-              Изменить
+              Change
             </button>
           </div>
         </div>
 
         <div className="border border-dark rounded p-3">
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Уволить сотрудника</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Fire an employee</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#fired-employee"
               className="btn btn-dark flex-grow-2 flex-shrink-1"
             >
-              Выполнить
+              Execute
             </button>
           </div>
           <div className="d-flex align-items-center gap-2 mb-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Добавить администратора</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Add administrator</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#add-admin"
               className="btn btn-dark flex-grow-2 flex-shrink-1"
             >
-              Выполнить
+              Execute
             </button>
           </div>
           <div className="d-flex align-items-center gap-2">
-            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Удалить администратора</p>
+            <p className="card-text p-0 m-0 flex-grow-1 flex-shrink-1">Remove administrator</p>
             <button
               type="button"
               data-bs-toggle="modal"
               data-bs-target="#delete-admin"
               className="btn btn-dark flex-grow-2 flex-shrink-1"
             >
-              Выполнить
+              Execute
             </button>
           </div>
         </div>

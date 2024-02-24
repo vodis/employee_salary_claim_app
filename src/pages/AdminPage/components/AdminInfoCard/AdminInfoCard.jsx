@@ -60,7 +60,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
                 active: activeTab === 0
               })}
             >
-              Таблица по сотрудникам
+              Table by employees
             </button>
           </li>
           <li className="nav-item">
@@ -70,7 +70,7 @@ const AdminInfoCard = ({ tx, receipt, read, isForceActiveTab }) => {
                 active: activeTab === 1
               })}
             >
-              Лог последней транзакции
+              Last transaction log
             </button>
           </li>
         </ul>

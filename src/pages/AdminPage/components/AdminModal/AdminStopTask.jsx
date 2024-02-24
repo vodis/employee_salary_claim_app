@@ -44,7 +44,7 @@ export const AdminStopTask = ({ callback }) => {
         isTaskStopped: true
       });
 
-      success(`Таска ${formData.taskId} была остановлена`);
+      success(`Task ${formData.taskId} has stopped`);
     } catch (e) {
       alert(e);
     }
@@ -63,7 +63,7 @@ export const AdminStopTask = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="stopTask">
-                Остановить задачу
+                Stop task
               </h1>
               <button
                 type="button"
@@ -77,7 +77,7 @@ export const AdminStopTask = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Укажите ТаскId задачи"
+                  placeholder="Specify the TaskId of the task"
                   aria-label="Таск ID"
                   aria-describedby="basic-addon1"
                   value={formData.taskId}
@@ -88,10 +88,10 @@ export const AdminStopTask = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Закрыть
+                  Close
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleStopTask}>
-                  Да, остановить!
+                  Yes, stop!
                 </button>
               </div>
             </div>

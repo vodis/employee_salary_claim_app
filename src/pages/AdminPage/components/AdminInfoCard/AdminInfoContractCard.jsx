@@ -46,11 +46,11 @@ const AdminInfoContractCard = () => {
 
   return (
     <div className="d-flex flex-column gap-3 align-items-start mb-4">
-      <h5 className="card-title mb-2 flex-shrink-0">Информация по контрактам:</h5>
+      <h5 className="card-title mb-2 flex-shrink-0">Contract information:</h5>
       <div className="w-100">
         <span style={{ fontSize: '0.8rem' }}>{`${usdtAddress} - адрес usdt`}</span>
         <div className="d-flex justify-content-between">
-          <span>Баланс на контракте (usdt):</span>
+          <span>Contract Balance (USDT):</span>
           <span>{usdtBalance}</span>
         </div>
       </div>

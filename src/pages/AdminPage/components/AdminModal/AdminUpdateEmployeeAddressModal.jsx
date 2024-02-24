@@ -33,7 +33,7 @@ export const AdminUpdateEmployeeAddressModal = ({ callback }) => {
       const transaction = await signer.sendTransaction(tx);
       callback(transaction);
 
-      success(`Адрес для сотрудника ${formData.nickname} был изменен на ${formData.addr}`);
+      success(`Employee address ${formData.nickname} was changed to ${formData.addr}`);
     } catch (e) {
       alert(e);
     }
@@ -51,7 +51,7 @@ export const AdminUpdateEmployeeAddressModal = ({ callback }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="withdrawLabel">
-              Изменить адрес для выплат сотруднику
+              Change the address for payments to an employee
             </h1>
             <button
               type="button"
@@ -64,7 +64,7 @@ export const AdminUpdateEmployeeAddressModal = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Введите никнейм сотрудника"
+              placeholder="Enter the employee nickname"
               aria-label="nickname"
               aria-describedby="basic-addon2"
               value={formData.nickname}
@@ -75,7 +75,7 @@ export const AdminUpdateEmployeeAddressModal = ({ callback }) => {
             <input
               type="text"
               className="form-control"
-              placeholder="Введите новый адресс"
+              placeholder="Enter a new address"
               aria-label="address"
               aria-describedby="basic-addon1"
               value={formData.addr}
@@ -84,10 +84,10 @@ export const AdminUpdateEmployeeAddressModal = ({ callback }) => {
           </div>
           <div className="d-flex gap-3 w-100 p-2 mb-2">
             <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-              Закрыть
+              Close
             </button>
             <button type="button" className="btn btn-primary w-100" onClick={handleUpdateAddress}>
-              Изменить
+              Change
             </button>
           </div>
         </div>

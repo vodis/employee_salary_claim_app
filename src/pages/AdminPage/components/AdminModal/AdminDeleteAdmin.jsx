@@ -83,7 +83,7 @@ export const AdminDeleteAdmin = ({ callback }) => {
       await deleteAdminAtEmployeeManager(values);
 
       callback(null, null, { deleteAdminAddress: formData.address, success: true });
-      success(`Права администратора сняты с ${formData.address}`);
+      success(`Administrator rights have been removed from ${formData.address}`);
     } catch (e) {
       alert(e);
     }
@@ -102,7 +102,7 @@ export const AdminDeleteAdmin = ({ callback }) => {
           <form className="row g-3">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="deleteAdmin">
-                Подтвердить удаления администратора!
+                Confirm administrator removal!
               </h1>
               <button
                 type="button"
@@ -116,7 +116,7 @@ export const AdminDeleteAdmin = ({ callback }) => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Адрес администратора"
+                  placeholder="Administrator address"
                   aria-label="nickname"
                   aria-describedby="basic-addon1"
                   value={formData.nickname}
@@ -127,10 +127,10 @@ export const AdminDeleteAdmin = ({ callback }) => {
             <div className="p-2">
               <div className="d-flex gap-3 w-100 p-2">
                 <button type="button" className="btn btn-secondary w-100" data-bs-dismiss="modal">
-                  Закрыть
+                  Close
                 </button>
                 <button type="submit" className="btn btn-primary w-100" onClick={handleDeleteAdmin}>
-                  Да, удалить админа!
+                  Yes, remove admin!
                 </button>
               </div>
             </div>
