@@ -3,10 +3,12 @@ import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereu
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
+import { useNotifications } from '../../../../providers/Notifications';
 
 export const AdminApproveStage = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
+  const { alert, success } = useNotifications();
   const [formData, setFormData] = useState({
     taskId: ''
   });
@@ -22,21 +24,27 @@ export const AdminApproveStage = ({ callback }) => {
   };
 
   const handleSendTransaction = async () => {
-    const contract = getRefContractForTaskManager(chainId, signer);
-    const values = [formData.taskId];
-    const data = contract.interface.encodeFunctionData('approveTaskById', values);
+    try {
+      const contract = getRefContractForTaskManager(chainId, signer);
+      const values = [formData.taskId];
+      const data = contract.interface.encodeFunctionData('approveTaskById', values);
 
-    const gasLimit = await contract.estimateGas.approveTaskById(...values);
-    const tx = {
-      to: contract.address,
-      data,
-      gasLimit: gasLimit * 2
-    };
+      const gasLimit = await contract.estimateGas.approveTaskById(...values);
+      const tx = {
+        to: contract.address,
+        data,
+        gasLimit: gasLimit * 2
+      };
 
-    const transaction = await signer.sendTransaction(tx);
-    const receipt = await transaction.wait();
+      const transaction = await signer.sendTransaction(tx);
+      const receipt = await transaction.wait();
 
-    callback(transaction, receipt);
+      callback(transaction, receipt);
+
+      success(`Таска ${formData.taskId} была пройдена Стэйдж Период`);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (

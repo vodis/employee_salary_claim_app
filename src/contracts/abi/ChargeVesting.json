@@ -544,7 +544,7 @@
     "name": "usdt",
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "internalType": "contract IToken",
         "name": "",
         "type": "address"
       }

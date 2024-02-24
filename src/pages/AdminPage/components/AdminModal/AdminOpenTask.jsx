@@ -3,10 +3,12 @@ import { getRefContractForTaskManager } from '../../../../utils/ethereum/ethereu
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../../../store/providerAndSigner/user-selector';
 import { useWallet } from '../../../../hooks/useWallet';
+import { useNotifications } from '../../../../providers/Notifications';
 
 export const AdminOpenTask = ({ callback }) => {
   const { signer } = useSelector(selectCurrentUser);
   const { chainId } = useWallet();
+  const { alert, success } = useNotifications();
   const [formData, setFormData] = useState({
     taskId: ''
   });
@@ -22,24 +24,30 @@ export const AdminOpenTask = ({ callback }) => {
   };
 
   const handleSendTransaction = async () => {
-    const contract = getRefContractForTaskManager(chainId, signer);
-    const values = [formData.taskId];
-    const data = contract.interface.encodeFunctionData('openTaskById', values);
+    try {
+      const contract = getRefContractForTaskManager(chainId, signer);
+      const values = [formData.taskId];
+      const data = contract.interface.encodeFunctionData('openTaskById', values);
 
-    const gasLimit = await contract.estimateGas.openTaskById(...values);
-    const tx = {
-      to: contract.address,
-      data,
-      gasLimit: gasLimit * 2
-    };
+      const gasLimit = await contract.estimateGas.openTaskById(...values);
+      const tx = {
+        to: contract.address,
+        data,
+        gasLimit: gasLimit * 2
+      };
 
-    const transaction = await signer.sendTransaction(tx);
-    const receipt = await transaction.wait();
+      const transaction = await signer.sendTransaction(tx);
+      const receipt = await transaction.wait();
 
-    callback(transaction, receipt, {
-      taskId: formData.taskId,
-      isTaskStopped: false
-    });
+      callback(transaction, receipt, {
+        taskId: formData.taskId,
+        isTaskStopped: false
+      });
+
+      success(`Таска ${formData.taskId} была открыта`);
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
